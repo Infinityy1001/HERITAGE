@@ -1,6 +1,26 @@
+import Redis from 'ioredis';
+
+const redis = new Redis(process.env.REDIS_URL);
+const DAILY_LIMIT = 5;
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
 
+  // Rate limiting par IP — 5 appels max par jour
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim()
+    || req.socket?.remoteAddress
+    || 'unknown';
+  const today = new Date().toISOString().slice(0, 10); // "2026-03-01"
+  const rlKey = `rl:${ip}:${today}`;
+
+  const count = await redis.incr(rlKey);
+  if (count === 1) await redis.expire(rlKey, 86400);
+
+  if (count > DAILY_LIMIT) {
+    return res.status(429).json({ error: 'Limite atteinte' });
+  }
+
+  // Appel API
   const { prompt } = req.body;
   if (!prompt) return res.status(400).json({ error: 'Missing prompt' });
 

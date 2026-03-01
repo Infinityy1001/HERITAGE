@@ -758,6 +758,7 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
 /* ─── RESPONSIVE ─── */
+/* ─── TABLETTE ─── */
 @media(max-width:960px){
   nav { padding: 0 24px; }
   .nav-links { display: none; }
@@ -779,6 +780,77 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
   .plan:first-child { border-right: none; border-bottom: 1px solid var(--border); }
   .testi-grid { grid-template-columns: 1fr; }
   footer { padding: 40px 24px; }
+}
+
+/* ─── MOBILE TÉLÉPHONE ─── */
+@media(max-width:480px){
+  /* Bannière — empêche le retour à la ligne */
+  #presaleBanner {
+    padding: 7px 14px; height: 36px;
+    flex-wrap: nowrap; overflow: hidden;
+  }
+  #presaleBanner span {
+    font-size: 11px; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis; min-width: 0;
+  }
+  #presaleBanner button { flex-shrink: 0; padding: 5px 10px; font-size: 9px; }
+
+  /* Nav */
+  nav { top: 36px; height: 58px; padding: 0 18px; }
+  .btn-nav-ghost { display: none; }
+  .btn-nav-fill { padding: 9px 16px; font-size: 10px; letter-spacing: 1.5px; }
+  .logo-text { font-size: 17px; letter-spacing: 3px; }
+
+  /* Hero */
+  .hero { padding-top: 94px; }
+  .hero-left { padding: 44px 20px 48px; }
+  h1 { font-size: clamp(38px, 10vw, 52px); }
+  .hero-p { font-size: 15px; }
+  .hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; margin-top: 32px; }
+  .btn-primary, .btn-secondary { text-align: center; }
+  .hero-nums { gap: 20px; flex-wrap: wrap; margin-top: 36px; padding-top: 24px; }
+  .hero-num-item .n { font-size: 32px; }
+  .hero-quote { padding: 20px; }
+
+  /* Sections */
+  .hiw,.pricing-section,.demo-section,.chapters-section,.waitlist-section,.book-preview-section,.pourqui-section { padding: 60px 18px; }
+
+  /* How it works */
+  .steps { grid-template-columns: 1fr; gap: 32px; }
+
+  /* Chapitres */
+  .ch-grid { grid-template-columns: 1fr; }
+  .ch-card { padding: 28px 22px; }
+
+  /* Démo — 3 étapes en colonne */
+  .demo-guide { flex-direction: column; align-items: stretch; }
+  .dg-step { padding: 12px 20px; }
+  .dg-step + .dg-step { border-left: 1px solid var(--border); border-top: none; }
+  .dg-text { font-size: 12px; white-space: normal; }
+
+  /* Éditeur */
+  .ed { padding: 20px 16px; gap: 16px; }
+  .q-text { font-size: 17px; }
+  .ans-ta { min-height: 110px; font-size: 15px; padding: 14px 16px; }
+  .voice-row { flex-wrap: wrap; }
+
+  /* Aperçu livre */
+  .book-page { padding: 28px 20px; }
+  .bp-dropcap { font-size: 52px; width: 42px; margin: 4px 8px 0 0; }
+  .bp-dropcap-para, .bp-para { font-size: 15px; line-height: 1.8; }
+
+  /* Plans */
+  .plan { padding: 36px 22px; }
+
+  /* Waitlist */
+  .wl-input { padding: 14px 16px; }
+  .btn-waitlist { padding: 15px 24px; }
+
+  /* Pour qui */
+  .pq-card { padding: 32px 22px; }
+
+  /* Footer */
+  footer { padding: 36px 18px; text-align: center; }
 }
 
 /* ─── WAITLIST ─── */
@@ -1667,6 +1739,12 @@ async function deepen() {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt })
       });
+      if (res.status === 429) {
+        btn.disabled = false; lbl.style.display = 'inline'; sp.style.display = 'none';
+        showToast('✦ Vous avez exploré la démo — rejoignez la liste d\'attente pour un accès complet');
+        setTimeout(() => document.getElementById('waitlist').scrollIntoView({ behavior: 'smooth' }), 1200);
+        return;
+      }
       const data = await res.json();
       const raw = data.text || '{}';
       try { p = JSON.parse(raw.replace(/```json|```/g, '').trim()); } catch { p = null; }

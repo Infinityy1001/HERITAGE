@@ -25,7 +25,7 @@
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+html { scroll-behavior:smooth; overflow-x:hidden; }
 
 body {
   background: var(--cream);
@@ -757,102 +757,6 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
-/* ─── RESPONSIVE ─── */
-/* ─── TABLETTE ─── */
-@media(max-width:960px){
-  nav { padding: 0 24px; }
-  .nav-links { display: none; }
-  .hero { grid-template-columns: 1fr; }
-  .hero-right { display: none; }
-  .hero-left { padding: 80px 28px 64px; }
-  .hiw,.pricing-section,.testi-section,.demo-section,.chapters-section,.waitlist-section,.book-preview-section,.pourqui-section { padding: 80px 24px; }
-  .bp-layout { grid-template-columns: 1fr; gap: 48px; }
-  .book-page { padding: 40px 32px; }
-  .pq-grid { grid-template-columns: 1fr; }
-  .waitlist-form { flex-direction: column; }
-  .wl-inputs { flex-direction: column; }
-  .steps { grid-template-columns: 1fr 1fr; gap: 40px 24px; }
-  .ch-grid { grid-template-columns: 1fr 1fr; }
-  .app-layout { grid-template-columns: 1fr; }
-  .sb, .ap { display: none; }
-  .ed { border-right: none; }
-  .plans { grid-template-columns: 1fr; }
-  .plan:first-child { border-right: none; border-bottom: 1px solid var(--border); }
-  .testi-grid { grid-template-columns: 1fr; }
-  footer { padding: 40px 24px; }
-}
-
-/* ─── MOBILE TÉLÉPHONE ─── */
-@media(max-width:480px){
-  /* Bannière — empêche le retour à la ligne */
-  #presaleBanner {
-    padding: 7px 14px; height: 36px;
-    flex-wrap: nowrap; overflow: hidden;
-  }
-  #presaleBanner span {
-    font-size: 11px; white-space: nowrap;
-    overflow: hidden; text-overflow: ellipsis; min-width: 0;
-  }
-  #presaleBanner button { flex-shrink: 0; padding: 5px 10px; font-size: 9px; }
-
-  /* Nav */
-  nav { top: 36px; height: 58px; padding: 0 18px; }
-  .btn-nav-ghost { display: none; }
-  .btn-nav-fill { padding: 9px 16px; font-size: 10px; letter-spacing: 1.5px; }
-  .logo-text { font-size: 17px; letter-spacing: 3px; }
-
-  /* Hero */
-  .hero { padding-top: 94px; }
-  .hero-left { padding: 44px 20px 48px; }
-  h1 { font-size: clamp(38px, 10vw, 52px); }
-  .hero-p { font-size: 15px; }
-  .hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; margin-top: 32px; }
-  .btn-primary, .btn-secondary { text-align: center; }
-  .hero-nums { gap: 20px; flex-wrap: wrap; margin-top: 36px; padding-top: 24px; }
-  .hero-num-item .n { font-size: 32px; }
-  .hero-quote { padding: 20px; }
-
-  /* Sections */
-  .hiw,.pricing-section,.demo-section,.chapters-section,.waitlist-section,.book-preview-section,.pourqui-section { padding: 60px 18px; }
-
-  /* How it works */
-  .steps { grid-template-columns: 1fr; gap: 32px; }
-
-  /* Chapitres */
-  .ch-grid { grid-template-columns: 1fr; }
-  .ch-card { padding: 28px 22px; }
-
-  /* Démo — 3 étapes en colonne */
-  .demo-guide { flex-direction: column; align-items: stretch; }
-  .dg-step { padding: 12px 20px; }
-  .dg-step + .dg-step { border-left: 1px solid var(--border); border-top: none; }
-  .dg-text { font-size: 12px; white-space: normal; }
-
-  /* Éditeur */
-  .ed { padding: 20px 16px; gap: 16px; }
-  .q-text { font-size: 17px; }
-  .ans-ta { min-height: 110px; font-size: 15px; padding: 14px 16px; }
-  .voice-row { flex-wrap: wrap; }
-
-  /* Aperçu livre */
-  .book-page { padding: 28px 20px; }
-  .bp-dropcap { font-size: 52px; width: 42px; margin: 4px 8px 0 0; }
-  .bp-dropcap-para, .bp-para { font-size: 15px; line-height: 1.8; }
-
-  /* Plans */
-  .plan { padding: 36px 22px; }
-
-  /* Waitlist */
-  .wl-input { padding: 14px 16px; }
-  .btn-waitlist { padding: 15px 24px; }
-
-  /* Pour qui */
-  .pq-card { padding: 32px 22px; }
-
-  /* Footer */
-  footer { padding: 36px 18px; text-align: center; }
-}
-
 /* ─── WAITLIST ─── */
 .waitlist-section {
   padding: 120px 56px;
@@ -1027,6 +931,82 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
   font-family: 'Cormorant Garamond', serif;
 }
 
+/* ─── HAMBURGER ─── */
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--ink); transition: all 0.28s; transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ─── MOBILE MENU ─── */
+.mobile-menu { display: none; }
+.mobile-menu.open { display: block; }
+.mm-overlay {
+  position: fixed; inset: 0; z-index: 998;
+  background: rgba(26,21,16,0.5); backdrop-filter: blur(4px);
+}
+.mm-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 999;
+  width: min(300px, 84vw); background: var(--cream);
+  border-left: 1px solid var(--border);
+  display: flex; flex-direction: column; padding: 28px 24px;
+  animation: mmSlide 0.24s ease;
+}
+@keyframes mmSlide { from { transform: translateX(100%); } to { transform: translateX(0); } }
+.mm-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 44px;
+}
+.mm-logo {
+  font-family: 'Cormorant Garamond', serif; font-size: 18px;
+  font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: var(--ink);
+}
+.mm-close {
+  background: none; border: none; cursor: pointer; font-size: 20px;
+  color: var(--muted); padding: 4px 8px; transition: color 0.2s;
+}
+.mm-close:hover { color: var(--ink); }
+.mm-nav { display: flex; flex-direction: column; flex: 1; }
+.mm-nav a {
+  font-family: 'Cormorant Garamond', serif; font-size: 27px;
+  font-weight: 300; font-style: italic; color: var(--ink);
+  text-decoration: none; cursor: pointer;
+  padding: 16px 0; border-bottom: 1px solid var(--border);
+  transition: color 0.15s;
+}
+.mm-nav a:hover, .mm-nav a:active { color: var(--gold); }
+.mm-cta {
+  margin-top: 36px; font-size: 11px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--cream); background: var(--ink);
+  border: none; cursor: pointer; padding: 15px 24px;
+  font-family: 'Jost', sans-serif; transition: background 0.2s;
+}
+.mm-cta:hover { background: var(--gold); }
+
+/* ─── CHIPS CHAPITRES MOBILE ─── */
+.mobile-chaps {
+  display: none; overflow-x: auto; gap: 7px;
+  padding: 12px 16px 10px; border-bottom: 1px solid var(--border);
+  background: var(--cream); -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.mobile-chaps::-webkit-scrollbar { display: none; }
+.mc-chip {
+  display: flex; align-items: center; gap: 5px; flex-shrink: 0;
+  padding: 7px 12px; border: 1px solid var(--border); background: var(--white);
+  font-family: 'Jost', sans-serif; font-size: 11px; color: var(--muted);
+  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+}
+.mc-chip:hover { border-color: var(--gold2); color: var(--ink); }
+.mc-chip.active { background: var(--ink); border-color: var(--ink); color: var(--cream); }
+.mc-num { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 300; }
+
 /* ─── DEMO GUIDE BAR ─── */
 .demo-guide {
   display: flex; align-items: stretch; justify-content: center;
@@ -1063,14 +1043,107 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
 .btn-example:hover { color: var(--gold2); }
 .btn-deepen.pulse { animation: deepPulse 0.8s ease-in-out 2; }
 @keyframes deepPulse { 0%,100%{box-shadow:0 0 0 0 rgba(184,146,42,0)} 50%{box-shadow:0 0 0 8px rgba(184,146,42,0.25)} }
+
+.lang-toggle {
+  font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
+  background: none; border: 1px solid var(--border2); padding: 6px 10px;
+  cursor: pointer; transition: all 0.2s;
+}
+.lang-toggle:hover { color: var(--ink); border-color: var(--gold); }
+
+/* ════════════════════════════════════════
+   RESPONSIVE — doit être EN DERNIER pour
+   ne pas être écrasé par le CSS des sections
+   ════════════════════════════════════════ */
+
+/* ─── TABLETTE (≤ 960px) ─── */
+@media(max-width:960px){
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 80px 28px 64px; }
+  .hero-left::after { display: none; }
+  .hiw,.pricing-section,.testi-section,.demo-section,.chapters-section,.waitlist-section,.book-preview-section,.pourqui-section { padding: 80px 24px; }
+  .bp-layout { grid-template-columns: 1fr; gap: 48px; }
+  .book-page { padding: 40px 32px; box-shadow: 0 16px 48px rgba(26,21,16,0.12); }
+  .pq-grid { grid-template-columns: 1fr; }
+  .waitlist-form { flex-direction: column; }
+  .wl-inputs { flex-direction: column; }
+  .steps { grid-template-columns: 1fr 1fr; gap: 40px 24px; }
+  .ch-grid { grid-template-columns: 1fr 1fr; }
+  .app-layout { grid-template-columns: 1fr; }
+  .sb, .ap { display: none; }
+  .ed { border-right: none; }
+  .plans { grid-template-columns: 1fr; }
+  .plan:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+  footer { padding: 40px 24px; }
+}
+
+/* ─── MOBILE TÉLÉPHONE (≤ 480px) ─── */
+@media(max-width:480px){
+  #presaleBanner { padding: 7px 14px; height: 36px; flex-wrap: nowrap; overflow: hidden; }
+  #presaleBanner span { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  #presaleBanner button { flex-shrink: 0; padding: 5px 10px; font-size: 9px; }
+
+  nav { top: 36px; height: 58px; padding: 0 18px; }
+  .btn-nav-ghost { display: none; }
+  .btn-nav-fill { padding: 9px 16px; font-size: 10px; letter-spacing: 1.5px; }
+  .logo-text { font-size: 17px; letter-spacing: 3px; }
+
+  .hero { padding-top: 94px; }
+  .hero-left { padding: 44px 20px 48px; }
+  h1 { font-size: clamp(38px, 10vw, 52px); }
+  .hero-p { font-size: 15px; }
+  .hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; margin-top: 32px; }
+  .btn-primary, .btn-secondary { text-align: center; }
+  .hero-nums { gap: 20px; flex-wrap: wrap; margin-top: 36px; padding-top: 24px; }
+  .hero-num-item .n { font-size: 32px; }
+  .hero-quote { padding: 20px; }
+
+  .hiw,.pricing-section,.demo-section,.chapters-section,.waitlist-section,.book-preview-section,.pourqui-section { padding: 60px 18px; }
+
+  .steps { grid-template-columns: 1fr; gap: 32px; }
+
+  .ch-grid { grid-template-columns: 1fr; }
+  .ch-card { padding: 28px 22px; }
+
+  .demo-guide { flex-direction: column; align-items: stretch; }
+  .dg-step { padding: 12px 20px; }
+  .dg-step + .dg-step { border-left: 1px solid var(--border); border-top: none; }
+  .dg-text { font-size: 12px; white-space: normal; }
+
+  .mobile-chaps { display: flex; }
+
+  .ed { padding: 20px 16px; gap: 16px; }
+  .q-text { font-size: 17px; }
+  .ans-ta { min-height: 110px; font-size: 15px; padding: 14px 16px; }
+  .voice-row { flex-wrap: wrap; }
+
+  .bp-layout { grid-template-columns: 1fr; }
+  .book-page { padding: 28px 20px; }
+  .bp-dropcap { font-size: 52px; width: 42px; margin: 4px 8px 0 0; }
+  .bp-dropcap-para, .bp-para { font-size: 15px; line-height: 1.8; }
+
+  .plan { padding: 36px 22px; }
+  .pq-grid { grid-template-columns: 1fr; }
+  .pq-card { padding: 32px 22px; }
+
+  .wl-input { padding: 14px 16px; }
+  .btn-waitlist { padding: 15px 24px; }
+
+  footer { padding: 36px 18px; text-align: center; }
+}
 </style>
 </head>
 <body>
 
 <!-- PRE-SALE BANNER -->
 <div id="presaleBanner" style="background:var(--gold);padding:10px 24px;text-align:center;position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:center;gap:16px;">
-  <span style="font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--ink);letter-spacing:0.5px;">✦ Lancement — Offre pré-vente · Accès prioritaire · Prix bloqué à vie</span>
-  <button onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})" style="font-family:'Jost',sans-serif;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:var(--ink);color:var(--cream);border:none;padding:6px 14px;cursor:pointer;flex-shrink:0;">Réserver →</button>
+  <span data-i18n="banner_text" style="font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--ink);letter-spacing:0.5px;">✦ Lancement — Offre pré-vente · Accès prioritaire · Prix bloqué à vie</span>
+  <button data-i18n="banner_btn" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})" style="font-family:'Jost',sans-serif;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:var(--ink);color:var(--cream);border:none;padding:6px 14px;cursor:pointer;flex-shrink:0;">Réserver →</button>
 </div>
 
 <!-- NAV -->
@@ -1080,45 +1153,67 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
     <span class="logo-text">Héritage</span>
   </a>
   <div class="nav-links">
-    <a href="#how">Le processus</a>
-    <a href="#demo">Démo</a>
-    <a href="#pricing">Tarifs</a>
+    <a href="#how" data-i18n="nav_process">Le processus</a>
+    <a href="#demo" data-i18n="nav_demo">Démo</a>
+    <a href="#pricing" data-i18n="nav_pricing">Tarifs</a>
   </div>
   <div class="nav-actions">
-    <button class="btn-nav-ghost" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'});setTimeout(()=>showToast('✦ L\'accès arrive bientôt — inscrivez-vous pour être parmi les premiers'),400)">Connexion</button>
-    <button class="btn-nav-fill" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Commencer</button>
+    <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
+    <button class="btn-nav-ghost" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'});setTimeout(()=>showToast(T[currentLang].toast_signin),400)" data-i18n="nav_signin">Connexion</button>
+    <button class="btn-nav-fill" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})" data-i18n="nav_start">Commencer</button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- MENU MOBILE -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mm-overlay" onclick="toggleMenu()"></div>
+  <div class="mm-panel">
+    <div class="mm-top">
+      <span class="mm-logo">Héritage</span>
+      <button class="mm-close" onclick="toggleMenu()">✕</button>
+    </div>
+    <nav class="mm-nav">
+      <a onclick="navTo('how')" data-i18n="nav_process">Le processus</a>
+      <a onclick="navTo('chapters')" data-i18n="nav_chapters">Les chapitres</a>
+      <a onclick="navTo('demo')" data-i18n="mm_demo">Démo interactive</a>
+      <a onclick="navTo('pricing')" data-i18n="nav_pricing">Tarifs</a>
+    </nav>
+    <button class="mm-cta" onclick="navTo('waitlist')" data-i18n="mm_join">Rejoindre la liste →</button>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
     <div class="hero-overline">
       <div class="hero-overline-line"></div>
-      <div class="hero-overline-text">Mémoire · Sagesse · Transmission</div>
+      <div class="hero-overline-text" data-i18n="hero_overline">Mémoire · Sagesse · Transmission</div>
     </div>
-    <h1>
+    <h1 data-i18n-html="hero_h1">
       Chaque vie mérite<br>
       <em>d'être transmise.</em>
     </h1>
     <div class="hero-rule"></div>
-    <p class="hero-p">Héritage guide vos proches à travers 12 chapitres essentiels. L'IA pose les bonnes questions — et transforme leurs réponses en un livre que vos descendants garderont pour toujours.</p>
+    <p class="hero-p" data-i18n="hero_p">Héritage guide vos proches à travers 12 chapitres essentiels. L'IA pose les bonnes questions — et transforme leurs réponses en un livre que vos descendants garderont pour toujours.</p>
     <div class="hero-ctas">
-      <button class="btn-primary" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Rejoindre la liste</button>
-      <button class="btn-secondary" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Essayer la démo</button>
+      <button class="btn-primary" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})" data-i18n="hero_cta1">Rejoindre la liste</button>
+      <button class="btn-secondary" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})" data-i18n="hero_cta2">Essayer la démo</button>
     </div>
     <div class="hero-nums">
       <div class="hero-num-item">
         <span class="n">12</span>
-        <span class="l">Chapitres guidés</span>
+        <span class="l" data-i18n="stat1">Chapitres guidés</span>
       </div>
       <div class="hero-num-item">
         <span class="n">1/sem.</span>
-        <span class="l">Question profonde</span>
+        <span class="l" data-i18n="stat2">Question profonde</span>
       </div>
       <div class="hero-num-item">
         <span class="n">∞</span>
-        <span class="l">Générations</span>
+        <span class="l" data-i18n="stat3">Générations</span>
       </div>
     </div>
   </div>
@@ -1142,8 +1237,8 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
 
     <div class="hero-quote">
       <span class="hero-quote-mark">"</span>
-      <div class="hero-quote-text">Ma mère se levait toujours avant tout le monde. Je l'entendais depuis ma chambre — le bruit discret de ses pantoufles sur le carrelage, et puis cette odeur qui montait jusqu'à moi comme une promesse.</div>
-      <div class="hero-quote-sig">Aperçu · Chapitre II — L'Enfance</div>
+      <div class="hero-quote-text" data-i18n="hero_quote">Ma mère se levait toujours avant tout le monde. Je l'entendais depuis ma chambre — le bruit discret de ses pantoufles sur le carrelage, et puis cette odeur qui montait jusqu'à moi comme une promesse.</div>
+      <div class="hero-quote-sig" data-i18n="hero_quote_sig">Aperçu · Chapitre II — L'Enfance</div>
     </div>
   </div>
 </section>
@@ -1152,33 +1247,33 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
 <section class="hiw" id="how">
   <div class="section-eyebrow">
     <div class="s-line"></div>
-    <div class="s-eye">Le processus</div>
+    <div class="s-eye" data-i18n="hiw_eye">Le processus</div>
   </div>
-  <h2 class="s-h">Simple comme<br><em>une conversation.</em></h2>
+  <h2 class="s-h" data-i18n-html="hiw_h2">Simple comme<br><em>une conversation.</em></h2>
   <div class="steps">
     <div class="step">
       <div class="step-num">01</div>
       <span class="step-icon">🎁</span>
-      <h3>Vous offrez l'accès</h3>
-      <p>Créez un compte pour votre proche. Il reçoit une invitation chaleureuse et peut commencer à son rythme.</p>
+      <h3 data-i18n="step1_h">Vous offrez l'accès</h3>
+      <p data-i18n="step1_p">Créez un compte pour votre proche. Il reçoit une invitation chaleureuse et peut commencer à son rythme.</p>
     </div>
     <div class="step">
       <div class="step-num">02</div>
       <span class="step-icon">💬</span>
-      <h3>L'IA guide l'entretien</h3>
-      <p>Sur 12 semaines, une question profonde par semaine. L'IA relance, approfondit, fait émerger l'essentiel.</p>
+      <h3 data-i18n="step2_h">L'IA guide l'entretien</h3>
+      <p data-i18n="step2_p">Sur 12 semaines, une question profonde par semaine. L'IA relance, approfondit, fait émerger l'essentiel.</p>
     </div>
     <div class="step">
       <div class="step-num">03</div>
       <span class="step-icon">📖</span>
-      <h3>Le livre prend forme</h3>
-      <p>Chaque réponse devient un chapitre narratif. L'IA structure le tout comme une véritable autobiographie.</p>
+      <h3 data-i18n="step3_h">Le livre prend forme</h3>
+      <p data-i18n="step3_p">Chaque réponse devient un chapitre narratif. L'IA structure le tout comme une véritable autobiographie.</p>
     </div>
     <div class="step">
       <div class="step-num">04</div>
       <span class="step-icon">🌿</span>
-      <h3>Transmis pour toujours</h3>
-      <p>Un livre numérique, un PDF haute qualité, et une version audio. Pour les générations qui viendront.</p>
+      <h3 data-i18n="step4_h">Transmis pour toujours</h3>
+      <p data-i18n="step4_p">Un livre numérique, un PDF haute qualité, et une version audio. Pour les générations qui viendront.</p>
     </div>
   </div>
 </section>
@@ -1188,31 +1283,31 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
   <div class="bp-inner">
     <div class="section-eyebrow">
       <div class="s-line"></div>
-      <div class="s-eye">Le résultat final</div>
+      <div class="s-eye" data-i18n="bp_eye">Le résultat final</div>
     </div>
-    <h2 class="s-h">Un livre <em>comme aucun autre.</em></h2>
+    <h2 class="s-h" data-i18n-html="bp_h2">Un livre <em>comme aucun autre.</em></h2>
     <div class="bp-layout">
       <div>
-        <p class="s-sub">À partir de vos réponses, Héritage construit un livre d'une qualité éditoriale rare. Chaque chapitre est mis en récit, structuré, et rendu lisible par tous — aujourd'hui comme dans cinquante ans.</p>
+        <p class="s-sub" data-i18n="bp_sub">À partir de vos réponses, Héritage construit un livre d'une qualité éditoriale rare. Chaque chapitre est mis en récit, structuré, et rendu lisible par tous — aujourd'hui comme dans cinquante ans.</p>
         <ul class="bp-bullets">
           <li>
             <span class="bp-bullet-icon">✦</span>
-            <span class="bp-bullet-text"><strong>Narrativisé par l'IA</strong> — Vos réponses brutes deviennent une prose fluide et vivante, sans perdre votre voix.</span>
+            <span class="bp-bullet-text" data-i18n-html="bp_b1"><strong>Narrativisé par l'IA</strong> — Vos réponses brutes deviennent une prose fluide et vivante, sans perdre votre voix.</span>
           </li>
           <li>
             <span class="bp-bullet-icon">✦</span>
-            <span class="bp-bullet-text"><strong>Mise en page éditoriale</strong> — Typographie soignée, chapitres clairs, prêt à être lu comme un vrai livre.</span>
+            <span class="bp-bullet-text" data-i18n-html="bp_b2"><strong>Mise en page éditoriale</strong> — Typographie soignée, chapitres clairs, prêt à être lu comme un vrai livre.</span>
           </li>
           <li>
             <span class="bp-bullet-icon">✦</span>
-            <span class="bp-bullet-text"><strong>Formats multiples</strong> — Livre numérique interactif, PDF haute résolution, et version audio narratée.</span>
+            <span class="bp-bullet-text" data-i18n-html="bp_b3"><strong>Formats multiples</strong> — Livre numérique interactif, PDF haute résolution, et version audio narratée.</span>
           </li>
           <li>
             <span class="bp-bullet-icon">✦</span>
-            <span class="bp-bullet-text"><strong>Vos mots, pour toujours</strong> — Hébergé en sécurité, accessible à votre famille pour les générations à venir.</span>
+            <span class="bp-bullet-text" data-i18n-html="bp_b4"><strong>Vos mots, pour toujours</strong> — Hébergé en sécurité, accessible à votre famille pour les générations à venir.</span>
           </li>
         </ul>
-        <span class="bp-tag">↓ Aperçu d'un chapitre finalisé</span>
+        <span class="bp-tag" data-i18n="bp_tag">↓ Aperçu d'un chapitre finalisé</span>
       </div>
 
       <div class="book-page">
@@ -1243,93 +1338,93 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
   <div class="chapters-inner">
     <div class="section-eyebrow">
       <div class="s-line"></div>
-      <div class="s-eye">Les chapitres</div>
+      <div class="s-eye" data-i18n="ch_eye">Les chapitres</div>
     </div>
-    <h2 class="s-h">Une vie entière,<br><em>chapitre par chapitre.</em></h2>
-    <p class="s-sub">Douze domaines essentiels, des centaines de questions conçues pour faire surgir la sagesse de chaque vie.</p>
+    <h2 class="s-h" data-i18n-html="ch_h2">Une vie entière,<br><em>chapitre par chapitre.</em></h2>
+    <p class="s-sub" data-i18n="ch_sub">Douze domaines essentiels, des centaines de questions conçues pour faire surgir la sagesse de chaque vie.</p>
     <div class="ch-grid">
       <div class="ch-card">
         <div class="ch-num-big">I</div>
         <span class="ch-icon">🌍</span>
-        <h3>Les origines</h3>
-        <p>Famille, racines, pays, langues perdues ou gardées. D'où venons-nous vraiment.</p>
+        <h3 data-i18n="ch1_name">Les origines</h3>
+        <p data-i18n="ch1_desc">Famille, racines, pays, langues perdues ou gardées. D'où venons-nous vraiment.</p>
         <div class="ch-count">8 questions guidées</div>
       </div>
       <div class="ch-card">
         <div class="ch-num-big">II</div>
         <span class="ch-icon">🌅</span>
-        <h3>L'enfance</h3>
-        <p>Souvenirs sensoriels, maison d'enfance, amis du quartier, étés qui n'en finissaient pas.</p>
+        <h3 data-i18n="ch2_name">L'enfance</h3>
+        <p data-i18n="ch2_desc">Souvenirs sensoriels, maison d'enfance, amis du quartier, étés qui n'en finissaient pas.</p>
         <div class="ch-count">10 questions guidées</div>
       </div>
       <div class="ch-card">
         <div class="ch-num-big">III</div>
         <span class="ch-icon">🎓</span>
-        <h3>La formation</h3>
-        <p>Les professeurs marquants, les rêves du jeune adulte, les chemins pris et abandonnés.</p>
+        <h3 data-i18n="ch3_name">La formation</h3>
+        <p data-i18n="ch3_desc">Les professeurs marquants, les rêves du jeune adulte, les chemins pris et abandonnés.</p>
         <div class="ch-count">7 questions guidées</div>
       </div>
       <div class="ch-card">
         <div class="ch-num-big">IV</div>
         <span class="ch-icon">💛</span>
-        <h3>L'amour</h3>
-        <p>Les premières émotions, la rencontre qui a tout changé, ce que l'amour a enseigné.</p>
+        <h3 data-i18n="ch4_name">L'amour</h3>
+        <p data-i18n="ch4_desc">Les premières émotions, la rencontre qui a tout changé, ce que l'amour a enseigné.</p>
         <div class="ch-count">9 questions guidées</div>
       </div>
       <div class="ch-card">
         <div class="ch-num-big">V</div>
         <span class="ch-icon">⚡</span>
-        <h3>Les épreuves</h3>
-        <p>Les moments difficiles traversés, les ressources trouvées, ce qui a forgé le caractère.</p>
+        <h3 data-i18n="ch5_name">Les épreuves</h3>
+        <p data-i18n="ch5_desc">Les moments difficiles traversés, les ressources trouvées, ce qui a forgé le caractère.</p>
         <div class="ch-count">8 questions guidées</div>
       </div>
       <div class="ch-card">
         <div class="ch-num-big">VI</div>
         <span class="ch-icon">💼</span>
-        <h3>Le travail & la vocation</h3>
-        <p>Les métiers exercés, les ambitions réalisées ou abandonnées, ce que le travail a appris sur soi.</p>
+        <h3 data-i18n="ch6_name">Le travail & la vocation</h3>
+        <p data-i18n="ch6_desc">Les métiers exercés, les ambitions réalisées ou abandonnées, ce que le travail a appris sur soi.</p>
         <div class="ch-count">7 questions guidées</div>
       </div>
       <div class="ch-card">
         <div class="ch-num-big">VII</div>
         <span class="ch-icon">🤝</span>
-        <h3>Les amitiés</h3>
-        <p>Les amis de toujours, les rencontres décisives, ceux qui ont compté sans qu'on le leur ait jamais dit.</p>
+        <h3 data-i18n="ch7_name">Les amitiés</h3>
+        <p data-i18n="ch7_desc">Les amis de toujours, les rencontres décisives, ceux qui ont compté sans qu'on le leur ait jamais dit.</p>
         <div class="ch-count">6 questions guidées</div>
       </div>
       <div class="ch-card">
         <div class="ch-num-big">VIII</div>
         <span class="ch-icon">👨‍👩‍👧</span>
-        <h3>La famille & la parentalité</h3>
-        <p>Ce que cela fait d'être parent, les transmissions reçues et celles qu'on a voulu briser ou perpétuer.</p>
+        <h3 data-i18n="ch8_name">La famille & la parentalité</h3>
+        <p data-i18n="ch8_desc">Ce que cela fait d'être parent, les transmissions reçues et celles qu'on a voulu briser ou perpétuer.</p>
         <div class="ch-count">9 questions guidées</div>
       </div>
       <div class="ch-card">
         <div class="ch-num-big">IX</div>
         <span class="ch-icon">🌐</span>
-        <h3>Les voyages & les horizons</h3>
-        <p>Les endroits qui ont changé quelque chose, les ailleurs rêvés ou vécus, ce que le monde a appris.</p>
+        <h3 data-i18n="ch9_name">Les voyages & les horizons</h3>
+        <p data-i18n="ch9_desc">Les endroits qui ont changé quelque chose, les ailleurs rêvés ou vécus, ce que le monde a appris.</p>
         <div class="ch-count">6 questions guidées</div>
       </div>
       <div class="ch-card">
         <div class="ch-num-big">X</div>
         <span class="ch-icon">🌿</span>
-        <h3>Les croyances & les valeurs</h3>
-        <p>Ce en quoi on croit profondément, ce qui a changé, les principes qui ont résisté à tout.</p>
+        <h3 data-i18n="ch10_name">Les croyances & les valeurs</h3>
+        <p data-i18n="ch10_desc">Ce en quoi on croit profondément, ce qui a changé, les principes qui ont résisté à tout.</p>
         <div class="ch-count">8 questions guidées</div>
       </div>
       <div class="ch-card">
         <div class="ch-num-big">XI</div>
         <span class="ch-icon">🪞</span>
-        <h3>Les regrets & les fiertés</h3>
-        <p>Ce qu'on referait différemment, ce dont on est secrètement fier — et qu'on n'a jamais osé dire.</p>
+        <h3 data-i18n="ch11_name">Les regrets & les fiertés</h3>
+        <p data-i18n="ch11_desc">Ce qu'on referait différemment, ce dont on est secrètement fier — et qu'on n'a jamais osé dire.</p>
         <div class="ch-count">7 questions guidées</div>
       </div>
       <div class="ch-card">
         <div class="ch-num-big">XII</div>
         <span class="ch-icon">✉️</span>
-        <h3>Le message</h3>
-        <p>Ce que vous voulez dire aux générations futures. Vos conseils. Votre vision du monde.</p>
+        <h3 data-i18n="ch12_name">Le message</h3>
+        <p data-i18n="ch12_desc">Ce que vous voulez dire aux générations futures. Vos conseils. Votre vision du monde.</p>
         <div class="ch-count">12 questions guidées</div>
       </div>
     </div>
@@ -1343,24 +1438,40 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
       <div>
         <div class="section-eyebrow">
           <div class="s-line"></div>
-          <div class="s-eye">Démo interactive</div>
+          <div class="s-eye" data-i18n="demo_eye">Démo interactive</div>
         </div>
-        <h2 class="s-h">Essayez<br><em>maintenant.</em></h2>
-        <p class="s-sub" style="margin-top:10px">Choisissez un chapitre, écrivez votre réponse, et l'IA génère une question de suivi personnalisée.</p>
+        <h2 class="s-h" data-i18n-html="demo_h2">Essayez<br><em>maintenant.</em></h2>
+        <p class="s-sub" style="margin-top:10px" data-i18n="demo_sub">Choisissez un chapitre, écrivez votre réponse, et l'IA génère une question de suivi personnalisée.</p>
       </div>
     </div>
 
     <div class="demo-guide">
-      <div class="dg-step"><div class="dg-num">1</div><span class="dg-text">Choisissez un chapitre</span></div>
-      <div class="dg-step"><div class="dg-num">2</div><span class="dg-text">Répondez à la question</span></div>
-      <div class="dg-step"><div class="dg-num">3</div><span class="dg-text">Cliquez <strong>Approfondir</strong></span></div>
+      <div class="dg-step"><div class="dg-num">1</div><span class="dg-text" data-i18n="dg1">Choisissez un chapitre</span></div>
+      <div class="dg-step"><div class="dg-num">2</div><span class="dg-text" data-i18n="dg2">Répondez à la question</span></div>
+      <div class="dg-step"><div class="dg-num">3</div><span class="dg-text" data-i18n-html="dg3">Cliquez <strong>Approfondir</strong></span></div>
     </div>
 
     <div class="shell">
       <div class="shell-bar">
         <div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div>
-        <div class="shell-title">Héritage — Entretien guidé</div>
+        <div class="shell-title" data-i18n="shell_title">Héritage — Entretien guidé</div>
       </div>
+      <!-- Chips chapitres — visibles uniquement sur mobile -->
+      <div class="mobile-chaps" id="mobileChaps">
+        <div class="mc-chip" onclick="setChapMobile(this,0)"><span>🌍</span><span class="mc-num">I</span></div>
+        <div class="mc-chip active" onclick="setChapMobile(this,1)"><span>🌅</span><span class="mc-num">II</span></div>
+        <div class="mc-chip" onclick="setChapMobile(this,2)"><span>🎓</span><span class="mc-num">III</span></div>
+        <div class="mc-chip" onclick="setChapMobile(this,3)"><span>💛</span><span class="mc-num">IV</span></div>
+        <div class="mc-chip" onclick="setChapMobile(this,4)"><span>⚡</span><span class="mc-num">V</span></div>
+        <div class="mc-chip" onclick="setChapMobile(this,5)"><span>💼</span><span class="mc-num">VI</span></div>
+        <div class="mc-chip" onclick="setChapMobile(this,6)"><span>🤝</span><span class="mc-num">VII</span></div>
+        <div class="mc-chip" onclick="setChapMobile(this,7)"><span>👨‍👩‍👧</span><span class="mc-num">VIII</span></div>
+        <div class="mc-chip" onclick="setChapMobile(this,8)"><span>🌐</span><span class="mc-num">IX</span></div>
+        <div class="mc-chip" onclick="setChapMobile(this,9)"><span>🌿</span><span class="mc-num">X</span></div>
+        <div class="mc-chip" onclick="setChapMobile(this,10)"><span>🪞</span><span class="mc-num">XI</span></div>
+        <div class="mc-chip" onclick="setChapMobile(this,11)"><span>✉️</span><span class="mc-num">XII</span></div>
+      </div>
+
       <div class="app-layout">
 
         <!-- Sidebar -->
@@ -1431,25 +1542,25 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
             <div class="q-text" id="qText">"Quel est votre souvenir d'enfance le plus vif — une image, une odeur, un son qui vous revient encore aujourd'hui comme si c'était hier ?"</div>
           </div>
 
-          <textarea class="ans-ta" id="ansText" placeholder="Écrivez librement... ou dictez votre réponse. Pas de bonne ou mauvaise réponse. Juste votre vérité."></textarea>
+          <textarea class="ans-ta" id="ansText" data-i18n-ph="ans_placeholder" placeholder="Écrivez librement... ou dictez votre réponse. Pas de bonne ou mauvaise réponse. Juste votre vérité."></textarea>
 
           <div class="voice-row">
             <button type="button" class="btn-voice" id="voiceBtn" onclick="toggleRecording()">🎙 Dicter</button>
-            <span class="voice-hint" id="voiceHint">Parlez en français — la transcription est instantanée</span>
+            <span class="voice-hint" id="voiceHint" data-i18n="voice_hint">Parlez en français — la transcription est instantanée</span>
           </div>
 
           <div class="ai-follow" id="aiFollow">
             <div class="ai-follow-head">
               <div class="ai-follow-dot"></div>
-              <div class="ai-follow-label">Question de suivi</div>
+              <div class="ai-follow-label" data-i18n="follow_label">Question de suivi</div>
             </div>
             <div class="ai-follow-text" id="aiFollowText"></div>
           </div>
 
           <div class="ed-footer">
-            <button class="btn-example" onclick="fillExample()">Voir un exemple →</button>
+            <button class="btn-example" onclick="fillExample()" data-i18n="example_btn">Voir un exemple →</button>
             <button class="btn-deepen" id="deepenBtn" onclick="deepen()">
-              <span id="deepenLabel">✦ Approfondir</span>
+              <span id="deepenLabel" data-i18n="deepen_btn">✦ Approfondir</span>
               <div class="spin-sm" id="deepenSpin"></div>
             </button>
           </div>
@@ -1457,26 +1568,26 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
 
         <!-- Analysis -->
         <div class="ap" id="apPanel">
-          <div class="ap-title">Analyse IA</div>
+          <div class="ap-title" data-i18n="ap_title">Analyse IA</div>
           <div class="ap-ph" id="apPh">
             <div class="ap-ph-icon">✦</div>
-            <p class="ap-ph-text">Vos insights apparaîtront ici après analyse.</p>
+            <p class="ap-ph-text" data-i18n="ap_ph">Vos insights apparaîtront ici après analyse.</p>
           </div>
           <div id="apContent" style="display:none;flex-direction:column;gap:13px;display:none;">
             <div class="score-block">
               <div class="score-val" id="scoreVal">—</div>
-              <div class="score-label">Richesse narrative</div>
+              <div class="score-label" data-i18n="score_label">Richesse narrative</div>
             </div>
             <div class="insight-block">
-              <div class="ib-label">Tonalité</div>
+              <div class="ib-label" data-i18n="ib_tone">Tonalité</div>
               <div class="ib-text" id="ibEmotion"></div>
             </div>
             <div class="insight-block">
-              <div class="ib-label">Thèmes</div>
+              <div class="ib-label" data-i18n="ib_themes">Thèmes</div>
               <div class="themes-wrap" id="ibThemes"></div>
             </div>
             <div class="insight-block">
-              <div class="ib-label">À explorer</div>
+              <div class="ib-label" data-i18n="ib_next_label">À explorer</div>
               <div class="ib-text" id="ibNext"></div>
             </div>
           </div>
@@ -1491,43 +1602,43 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
 <section class="pricing-section" id="pricing">
   <div class="section-eyebrow">
     <div class="s-line"></div>
-    <div class="s-eye">Investissement</div>
+    <div class="s-eye" data-i18n="pricing_eye">Investissement</div>
   </div>
-  <h2 class="s-h">Un prix pour<br><em>l'éternité.</em></h2>
-  <p class="s-sub">Moins cher qu'un dîner. Infiniment plus précieux.</p>
+  <h2 class="s-h" data-i18n-html="pricing_h2">Un prix pour<br><em>l'éternité.</em></h2>
+  <p class="s-sub" data-i18n="pricing_sub">Moins cher qu'un dîner. Infiniment plus précieux.</p>
 
   <div class="plans">
     <div class="plan">
       <div class="plan-tier">Essentiel <span style="font-size:10px;color:var(--gold);letter-spacing:2px;font-family:'Jost',sans-serif;">· PRÉ-VENTE</span></div>
       <div class="plan-price"><sup>€</sup>9</div>
-      <div class="plan-period">par mois</div>
+      <div class="plan-period" data-i18n="plan1_period">par mois</div>
       <div class="plan-rule"></div>
       <ul class="plan-features">
-        <li><span class="feat-tick">✦</span>12 chapitres guidés</li>
-        <li><span class="feat-tick">✦</span>Questions de suivi IA</li>
-        <li><span class="feat-tick">✦</span>Livre numérique interactif</li>
-        <li><span class="feat-tick">✦</span>Export PDF haute résolution</li>
-        <li class="off"><span class="feat-tick">—</span>Version audio narratée</li>
-        <li class="off"><span class="feat-tick">—</span>Livre imprimé & relié</li>
+        <li><span class="feat-tick">✦</span><span data-i18n="f1_1">12 chapitres guidés</span></li>
+        <li><span class="feat-tick">✦</span><span data-i18n="f1_2">Questions de suivi IA</span></li>
+        <li><span class="feat-tick">✦</span><span data-i18n="f1_3">Livre numérique interactif</span></li>
+        <li><span class="feat-tick">✦</span><span data-i18n="f1_4">Export PDF haute résolution</span></li>
+        <li class="off"><span class="feat-tick">—</span><span data-i18n="f1_5">Version audio narratée</span></li>
+        <li class="off"><span class="feat-tick">—</span><span data-i18n="f1_6">Livre imprimé & relié</span></li>
       </ul>
-      <button class="plan-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Rejoindre la liste →</button>
+      <button class="plan-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})" data-i18n="plan1_btn">Rejoindre la liste →</button>
     </div>
 
     <div class="plan featured">
       <div class="plan-badge">Recommandé</div>
       <div class="plan-tier">Mémoire Vivante <span style="font-size:10px;color:var(--gold2);letter-spacing:2px;font-family:'Jost',sans-serif;">· PRÉ-VENTE</span></div>
       <div class="plan-price"><sup>€</sup>24</div>
-      <div class="plan-period">par mois · tout inclus</div>
+      <div class="plan-period" data-i18n="plan2_period">par mois · tout inclus</div>
       <div class="plan-rule"></div>
       <ul class="plan-features">
-        <li><span class="feat-tick">✦</span>12 chapitres guidés</li>
-        <li><span class="feat-tick">✦</span>Questions de suivi IA</li>
-        <li><span class="feat-tick">✦</span>Livre numérique interactif</li>
-        <li><span class="feat-tick">✦</span>Export PDF haute résolution</li>
-        <li><span class="feat-tick">✦</span>Version audio narratée</li>
-        <li><span class="feat-tick">✦</span>1 livre imprimé & relié / an</li>
+        <li><span class="feat-tick">✦</span><span data-i18n="f2_1">12 chapitres guidés</span></li>
+        <li><span class="feat-tick">✦</span><span data-i18n="f2_2">Questions de suivi IA</span></li>
+        <li><span class="feat-tick">✦</span><span data-i18n="f2_3">Livre numérique interactif</span></li>
+        <li><span class="feat-tick">✦</span><span data-i18n="f2_4">Export PDF haute résolution</span></li>
+        <li><span class="feat-tick">✦</span><span data-i18n="f2_5">Version audio narratée</span></li>
+        <li><span class="feat-tick">✦</span><span data-i18n="f2_6">1 livre imprimé & relié / an</span></li>
       </ul>
-      <button class="plan-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Accès prioritaire →</button>
+      <button class="plan-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})" data-i18n="plan2_btn">Accès prioritaire →</button>
     </div>
   </div>
 </section>
@@ -1537,27 +1648,27 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
   <div class="pourqui-inner">
     <div class="section-eyebrow">
       <div class="s-line"></div>
-      <div class="s-eye">Pour chaque famille</div>
+      <div class="s-eye" data-i18n="pq_eye">Pour chaque famille</div>
     </div>
-    <h2 class="s-h">Des histoires qui<br><em>méritent d'être racontées.</em></h2>
+    <h2 class="s-h" data-i18n-html="pq_h2">Des histoires qui<br><em>méritent d'être racontées.</em></h2>
     <div class="pq-grid">
       <div class="pq-card">
         <span class="pq-icon">🎁</span>
-        <div class="pq-who">Un cadeau pour vos parents</div>
-        <p class="pq-scenario">Votre mère approche les 70 ans. Elle a vécu tant de choses — mais n'en parle jamais. Offrez-lui Héritage : elle répondra à son rythme, seule, sans pression. Et vous découvrirez une femme que vous ne connaissiez qu'à moitié.</p>
-        <div class="pq-tag">✦ Un livre que vos enfants liront dans 30 ans</div>
+        <div class="pq-who" data-i18n="pq1_who">Un cadeau pour vos parents</div>
+        <p class="pq-scenario" data-i18n="pq1_scenario">Votre mère approche les 70 ans. Elle a vécu tant de choses — mais n'en parle jamais. Offrez-lui Héritage : elle répondra à son rythme, seule, sans pression. Et vous découvrirez une femme que vous ne connaissiez qu'à moitié.</p>
+        <div class="pq-tag" data-i18n="pq1_tag">✦ Un livre que vos enfants liront dans 30 ans</div>
       </div>
       <div class="pq-card">
         <span class="pq-icon">⏳</span>
-        <div class="pq-who">Avant qu'il soit trop tard</div>
-        <p class="pq-scenario">Votre père de 80 ans a traversé des guerres, des exils, des deuils. Il n'a jamais vraiment parlé. Héritage pose les questions que vous n'osez pas poser — avec douceur, avec patience, semaine après semaine.</p>
-        <div class="pq-tag">✦ Des histoires qui auraient disparu pour toujours</div>
+        <div class="pq-who" data-i18n="pq2_who">Avant qu'il soit trop tard</div>
+        <p class="pq-scenario" data-i18n="pq2_scenario">Votre père de 80 ans a traversé des guerres, des exils, des deuils. Il n'a jamais vraiment parlé. Héritage pose les questions que vous n'osez pas poser — avec douceur, avec patience, semaine après semaine.</p>
+        <div class="pq-tag" data-i18n="pq2_tag">✦ Des histoires qui auraient disparu pour toujours</div>
       </div>
       <div class="pq-card">
         <span class="pq-icon">✉️</span>
-        <div class="pq-who">Votre propre héritage</div>
-        <p class="pq-scenario">Vous avez aimé, traversé des épreuves, appris. Vos petits-enfants ne vous connaissent pas vraiment — pas encore. Héritage vous donne les mots pour leur laisser ce qui comptera le plus : vous.</p>
-        <div class="pq-tag">✦ Un message qui traversera les générations</div>
+        <div class="pq-who" data-i18n="pq3_who">Votre propre héritage</div>
+        <p class="pq-scenario" data-i18n="pq3_scenario">Vous avez aimé, traversé des épreuves, appris. Vos petits-enfants ne vous connaissent pas vraiment — pas encore. Héritage vous donne les mots pour leur laisser ce qui comptera le plus : vous.</p>
+        <div class="pq-tag" data-i18n="pq3_tag">✦ Un message qui traversera les générations</div>
       </div>
     </div>
   </div>
@@ -1568,18 +1679,18 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
   <div class="waitlist-inner">
     <div class="section-eyebrow">
       <div class="s-line"></div>
-      <div class="s-eye">Pré-lancement</div>
+      <div class="s-eye" data-i18n="wl_eye">Liste d'attente</div>
     </div>
-    <h2 class="s-h">Soyez parmi<br><em>les premiers.</em></h2>
-    <p class="s-sub">Héritage est en pré-lancement. Inscrivez-vous pour obtenir un accès prioritaire et votre tarif bloqué à vie.</p>
+    <h2 class="s-h" data-i18n-html="wl_h2">Soyez parmi<br><em>les premiers.</em></h2>
+    <p class="s-sub" data-i18n="wl_sub">Héritage est en cours de finalisation. Laissez votre adresse — vous recevrez votre invitation en priorité, avec le tarif pré-lancement bloqué.</p>
     <form class="waitlist-form" id="waitlistForm" onsubmit="submitWaitlist(event)">
       <div class="wl-inputs">
-        <input type="text" class="wl-input" id="wlName" placeholder="Votre prénom" autocomplete="given-name">
-        <input type="email" class="wl-input" id="wlEmail" placeholder="Votre adresse email" required autocomplete="email">
+        <input type="text" class="wl-input" id="wlName" data-i18n-ph="wl_name_ph" placeholder="Votre prénom" autocomplete="given-name">
+        <input type="email" class="wl-input" id="wlEmail" data-i18n-ph="wl_email_ph" placeholder="Votre adresse e-mail" required autocomplete="email">
       </div>
-      <button type="submit" class="btn-waitlist" id="wlBtn">Rejoindre la liste →</button>
+      <button type="submit" class="btn-waitlist" id="wlBtn" data-i18n="wl_btn">Rejoindre la liste →</button>
     </form>
-    <p class="wl-note">Aucun spam · Désabonnement en 1 clic</p>
+    <p class="wl-note" data-i18n="wl_note">Aucun spam · Désabonnement en 1 clic</p>
   </div>
 </section>
 
@@ -1589,28 +1700,248 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
     <div class="footer-emblem">✦</div>
     Héritage
   </div>
-  <p>© 2026 — Préserver ce qui compte vraiment</p>
-  <p>RGPD · Chiffrement · Vos histoires vous appartiennent</p>
+  <p data-i18n="footer_copy">© 2026 — Préserver ce qui compte vraiment</p>
+  <p data-i18n="footer_legal">RGPD · Chiffrement · Vos histoires vous appartiennent</p>
 </footer>
 
 <div class="toast" id="toastEl"><span id="toastMsg"></span></div>
 
 <script>
-const chapters = [
-  { tag:"Chapitre I · Les origines",              q:'"D\'où vient votre famille ? Y a-t-il un pays, une région, une langue perdue ou gardée — et que ressentez-vous quand vous y pensez ?"' },
-  { tag:"Chapitre II · L\'enfance",               q:'"Quel est votre souvenir d\'enfance le plus vif — une image, une odeur, un son qui vous revient encore aujourd\'hui comme si c\'était hier ?"' },
-  { tag:"Chapitre III · La formation",            q:'"Y a-t-il un professeur, un mentor ou une rencontre qui a changé la direction de votre vie ? Qu\'est-ce qu\'il vous a appris ?"' },
-  { tag:"Chapitre IV · L\'amour",                 q:'"Comment avez-vous rencontré la personne qui a le plus compté dans votre vie ? Qu\'est-ce qui vous a frappé en premier ?"' },
-  { tag:"Chapitre V · Les épreuves",              q:'"Quelle est l\'épreuve la plus difficile que vous ayez traversée, et qu\'est-ce qu\'elle vous a appris sur vous-même ?"' },
-  { tag:"Chapitre VI · Le travail & la vocation", q:'"Quel est le travail dont vous êtes le plus fier — pas nécessairement le plus reconnu, mais celui qui vous a semblé le plus utile ou vrai ?"' },
-  { tag:"Chapitre VII · Les amitiés",             q:'"Y a-t-il un ami que vous n\'avez pas assez remercié, ou une amitié que vous avez laissé s\'éloigner et dont vous pensez encore ?"' },
-  { tag:"Chapitre VIII · La famille",             q:'"Qu\'est-ce que cela vous a appris sur vous-même, d\'être parent — ou d\'avoir été l\'enfant que vous avez été ?"' },
-  { tag:"Chapitre IX · Les voyages",              q:'"Y a-t-il un endroit dans le monde qui a changé quelque chose en vous — un voyage qui vous a rendu différent de celui qui était parti ?"' },
-  { tag:"Chapitre X · Les croyances & les valeurs", q:'"Qu\'est-ce en quoi vous croyez profondément — pas une religion nécessairement, mais une conviction qui a guidé vos choix toute votre vie ?"' },
-  { tag:"Chapitre XI · Les regrets & les fiertés",  q:'"Y a-t-il quelque chose dont vous êtes secrètement fier et que vous n\'avez jamais vraiment dit à voix haute ?"' },
-  { tag:"Chapitre XII · Le message",              q:'"Qu\'est-ce que vous voulez que vos petits-enfants sachent de vous — pas vos réalisations, mais qui vous étiez vraiment ?"' },
-];
+/* ── INTERNATIONALISATION ── */
+const T = {
+  fr: {
+    banner_text: '✦ Lancement — Offre pré-vente · Accès prioritaire · Prix bloqué à vie',
+    banner_btn: 'Réserver →',
+    nav_process: 'Le processus', nav_demo: 'Démo', nav_pricing: 'Tarifs',
+    nav_chapters: 'Les chapitres', mm_demo: 'Démo interactive',
+    nav_signin: 'Connexion', nav_start: 'Commencer', mm_join: 'Rejoindre la liste →',
+    hero_overline: 'Mémoire · Sagesse · Transmission',
+    hero_h1: 'Chaque vie mérite<br><em>d\'être transmise.</em>',
+    hero_p: 'Héritage guide vos proches à travers 12 chapitres essentiels. L\'IA pose les bonnes questions — et transforme leurs réponses en un livre que vos descendants garderont pour toujours.',
+    hero_cta1: 'Rejoindre la liste', hero_cta2: 'Essayer la démo',
+    stat1: 'Chapitres guidés', stat2: 'Question profonde', stat3: 'Générations',
+    hero_quote: 'Ma mère se levait toujours avant tout le monde. Je l\'entendais depuis ma chambre — le bruit discret de ses pantoufles sur le carrelage, et puis cette odeur qui montait jusqu\'à moi comme une promesse.',
+    hero_quote_sig: 'Aperçu · Chapitre II — L\'Enfance',
+    hiw_eye: 'Le processus',
+    hiw_h2: 'Simple comme<br><em>une conversation.</em>',
+    step1_h: 'Vous offrez l\'accès', step1_p: 'Créez un compte pour votre proche. Il reçoit une invitation chaleureuse et peut commencer à son rythme.',
+    step2_h: 'L\'IA guide l\'entretien', step2_p: 'Sur 12 semaines, une question profonde par semaine. L\'IA relance, approfondit, fait émerger l\'essentiel.',
+    step3_h: 'Le livre prend forme', step3_p: 'Chaque réponse devient un chapitre narratif. L\'IA structure le tout comme une véritable autobiographie.',
+    step4_h: 'Transmis pour toujours', step4_p: 'Un livre numérique, un PDF haute qualité, et une version audio. Pour les générations qui viendront.',
+    bp_eye: 'Le résultat final', bp_h2: 'Un livre <em>comme aucun autre.</em>',
+    bp_sub: 'À partir de vos réponses, Héritage construit un livre d\'une qualité éditoriale rare. Chaque chapitre est mis en récit, structuré, et rendu lisible par tous — aujourd\'hui comme dans cinquante ans.',
+    bp_b1: '<strong>Narrativisé par l\'IA</strong> — Vos réponses brutes deviennent une prose fluide et vivante, sans perdre votre voix.',
+    bp_b2: '<strong>Mise en page éditoriale</strong> — Typographie soignée, chapitres clairs, prêt à être lu comme un vrai livre.',
+    bp_b3: '<strong>Formats multiples</strong> — Livre numérique interactif, PDF haute résolution, et version audio narratée.',
+    bp_b4: '<strong>Vos mots, pour toujours</strong> — Hébergé en sécurité, accessible à votre famille pour les générations à venir.',
+    bp_tag: '↓ Aperçu d\'un chapitre finalisé',
+    ch_eye: 'Les chapitres', ch_h2: 'Une vie entière,<br><em>chapitre par chapitre.</em>',
+    ch_sub: 'Douze domaines essentiels, des centaines de questions conçues pour faire surgir la sagesse de chaque vie.',
+    ch1_name: 'Les origines', ch1_desc: 'Famille, racines, pays, langues perdues ou gardées. D\'où venons-nous vraiment.',
+    ch2_name: 'L\'enfance', ch2_desc: 'Souvenirs sensoriels, maison d\'enfance, amis du quartier, étés qui n\'en finissaient pas.',
+    ch3_name: 'La formation', ch3_desc: 'Les professeurs marquants, les rêves du jeune adulte, les chemins pris et abandonnés.',
+    ch4_name: 'L\'amour', ch4_desc: 'Les premières émotions, la rencontre qui a tout changé, ce que l\'amour a enseigné.',
+    ch5_name: 'Les épreuves', ch5_desc: 'Les moments difficiles traversés, les ressources trouvées, ce qui a forgé le caractère.',
+    ch6_name: 'Le travail & la vocation', ch6_desc: 'Les métiers exercés, les ambitions réalisées ou abandonnées, ce que le travail a appris sur soi.',
+    ch7_name: 'Les amitiés', ch7_desc: 'Les amis de toujours, les rencontres décisives, ceux qui ont compté sans qu\'on le leur ait jamais dit.',
+    ch8_name: 'La famille & la parentalité', ch8_desc: 'Ce que cela fait d\'être parent, les transmissions reçues et celles qu\'on a voulu briser ou perpétuer.',
+    ch9_name: 'Les voyages & les horizons', ch9_desc: 'Les endroits qui ont changé quelque chose, les ailleurs rêvés ou vécus, ce que le monde a appris.',
+    ch10_name: 'Les croyances & les valeurs', ch10_desc: 'Ce en quoi on croit profondément, ce qui a changé, les principes qui ont résisté à tout.',
+    ch11_name: 'Les regrets & les fiertés', ch11_desc: 'Ce qu\'on referait différemment, ce dont on est secrètement fier — et qu\'on n\'a jamais osé dire.',
+    ch12_name: 'Le message', ch12_desc: 'Ce que vous voulez dire aux générations futures. Vos conseils. Votre vision du monde.',
+    demo_eye: 'Démo interactive', demo_h2: 'Essayez<br><em>maintenant.</em>',
+    demo_sub: 'Choisissez un chapitre, écrivez votre réponse, et l\'IA génère une question de suivi personnalisée.',
+    shell_title: 'Héritage — Entretien guidé',
+    dg1: 'Choisissez un chapitre', dg2: 'Répondez à la question', dg3: 'Cliquez <strong>Approfondir</strong>',
+    ap_title: 'Analyse IA', ap_ph: 'Vos insights apparaîtront ici après analyse.',
+    score_label: 'Richesse narrative', ib_tone: 'Tonalité', ib_themes: 'Thèmes', ib_next_label: 'À explorer',
+    follow_label: 'Question de suivi', deepen_btn: '✦ Approfondir', example_btn: 'Voir un exemple →',
+    ans_placeholder: 'Écrivez librement... ou dictez votre réponse. Pas de bonne ou mauvaise réponse. Juste votre vérité.',
+    voice_hint: 'Parlez en français — la transcription est instantanée',
+    pricing_eye: 'Investissement', pricing_h2: 'Un prix pour<br><em>l\'éternité.</em>',
+    pricing_sub: 'Moins cher qu\'un dîner. Infiniment plus précieux.',
+    plan1_period: 'par mois', plan1_btn: 'Rejoindre la liste →',
+    f1_1: '12 chapitres guidés', f1_2: 'Questions de suivi IA', f1_3: 'Livre numérique interactif',
+    f1_4: 'Export PDF haute résolution', f1_5: 'Version audio narratée', f1_6: 'Livre imprimé & relié',
+    plan2_period: 'par mois · tout inclus', plan2_btn: 'Accès prioritaire →',
+    f2_1: '12 chapitres guidés', f2_2: 'Questions de suivi IA', f2_3: 'Livre numérique interactif',
+    f2_4: 'Export PDF haute résolution', f2_5: 'Version audio narratée', f2_6: '1 livre imprimé & relié / an',
+    pq_eye: 'Pour chaque famille', pq_h2: 'Des histoires qui<br><em>méritent d\'être racontées.</em>',
+    pq1_who: 'Un cadeau pour vos parents',
+    pq1_scenario: 'Votre mère approche les 70 ans. Elle a vécu tant de choses — mais n\'en parle jamais. Offrez-lui Héritage : elle répondra à son rythme, seule, sans pression. Et vous découvrirez une femme que vous ne connaissiez qu\'à moitié.',
+    pq1_tag: '✦ Un livre que vos enfants liront dans 30 ans',
+    pq2_who: 'Avant qu\'il soit trop tard',
+    pq2_scenario: 'Votre père de 80 ans a traversé des guerres, des exils, des deuils. Il n\'a jamais vraiment parlé. Héritage pose les questions que vous n\'osez pas poser — avec douceur, avec patience, semaine après semaine.',
+    pq2_tag: '✦ Des histoires qui auraient disparu pour toujours',
+    pq3_who: 'Votre propre héritage',
+    pq3_scenario: 'Vous avez aimé, traversé des épreuves, appris. Vos petits-enfants ne vous connaissent pas vraiment — pas encore. Héritage vous donne les mots pour leur laisser ce qui comptera le plus : vous.',
+    pq3_tag: '✦ Un message qui traversera les générations',
+    wl_eye: 'Liste d\'attente', wl_h2: 'Soyez parmi<br><em>les premiers.</em>',
+    wl_sub: 'Héritage est en cours de finalisation. Laissez votre adresse — vous recevrez votre invitation en priorité, avec le tarif pré-lancement bloqué.',
+    wl_name_ph: 'Votre prénom', wl_email_ph: 'Votre adresse e-mail',
+    wl_btn: 'Rejoindre la liste →', wl_note: 'Aucun spam · Désabonnement en 1 clic',
+    footer_copy: '© 2026 — Préserver ce qui compte vraiment',
+    footer_legal: 'RGPD · Chiffrement · Vos histoires vous appartiennent',
+    toast_signin: '✦ L\'accès arrive bientôt — inscrivez-vous pour être parmi les premiers',
+    deepen_new: '↻ Nouvelle question',
+  },
+  en: {
+    banner_text: '✦ Launch — Pre-sale offer · Priority access · Lifetime price lock',
+    banner_btn: 'Reserve →',
+    nav_process: 'How it works', nav_demo: 'Demo', nav_pricing: 'Pricing',
+    nav_chapters: 'Chapters', mm_demo: 'Interactive Demo',
+    nav_signin: 'Sign in', nav_start: 'Get started', mm_join: 'Join the waitlist →',
+    hero_overline: 'Memory · Wisdom · Legacy',
+    hero_h1: 'Every life deserves<br><em>to be remembered.</em>',
+    hero_p: 'Heritage guides your loved ones through 12 essential chapters. AI asks the right questions — and transforms their answers into a book your descendants will treasure forever.',
+    hero_cta1: 'Join the waitlist', hero_cta2: 'Try the demo',
+    stat1: 'Guided chapters', stat2: 'Deep question', stat3: 'Generations',
+    hero_quote: 'My mother always woke before everyone else. I could hear her from my room — the soft shuffle of her slippers on the tiles, and then that smell rising up to me like a promise.',
+    hero_quote_sig: 'Preview · Chapter II — Childhood',
+    hiw_eye: 'The process',
+    hiw_h2: 'As simple as<br><em>a conversation.</em>',
+    step1_h: 'You give access', step1_p: 'Create an account for your loved one. They receive a warm invitation and can start at their own pace.',
+    step2_h: 'AI guides the interview', step2_p: 'Over 12 weeks, one deep question per week. The AI follows up, goes deeper, and draws out what matters most.',
+    step3_h: 'The book takes shape', step3_p: 'Each answer becomes a narrative chapter. AI structures everything like a real autobiography.',
+    step4_h: 'Passed down forever', step4_p: 'A digital book, a high-quality PDF, and an audio version. For the generations to come.',
+    bp_eye: 'The final result', bp_h2: 'A book <em>unlike any other.</em>',
+    bp_sub: 'From your answers, Heritage builds a book of rare editorial quality. Each chapter is narrated, structured, and readable by anyone — today and fifty years from now.',
+    bp_b1: '<strong>AI-narrated</strong> — Your raw answers become flowing, vivid prose, without losing your voice.',
+    bp_b2: '<strong>Editorial layout</strong> — Refined typography, clear chapters, ready to read like a real book.',
+    bp_b3: '<strong>Multiple formats</strong> — Interactive digital book, high-resolution PDF, and narrated audio version.',
+    bp_b4: '<strong>Your words, forever</strong> — Securely hosted, accessible to your family for generations to come.',
+    bp_tag: '↓ Preview of a completed chapter',
+    ch_eye: 'The chapters', ch_h2: 'An entire life,<br><em>chapter by chapter.</em>',
+    ch_sub: 'Twelve essential areas, hundreds of questions designed to bring out the wisdom in every life.',
+    ch1_name: 'Origins', ch1_desc: 'Family, roots, countries, languages lost or kept. Where we truly come from.',
+    ch2_name: 'Childhood', ch2_desc: 'Sensory memories, childhood home, neighbourhood friends, summers that never seemed to end.',
+    ch3_name: 'Education', ch3_desc: 'Formative teachers, the young adult\'s dreams, paths taken and abandoned.',
+    ch4_name: 'Love', ch4_desc: 'First emotions, the meeting that changed everything, what love has taught.',
+    ch5_name: 'Hardships', ch5_desc: 'The difficult moments endured, the resources found, what forged character.',
+    ch6_name: 'Work & vocation', ch6_desc: 'Careers held, ambitions realised or abandoned, what work taught about oneself.',
+    ch7_name: 'Friendships', ch7_desc: 'Lifelong friends, decisive encounters, those who mattered without ever being told.',
+    ch8_name: 'Family & parenthood', ch8_desc: 'What it means to be a parent, the transmissions received and those one wanted to break or continue.',
+    ch9_name: 'Travels & horizons', ch9_desc: 'Places that changed something, elsewheres dreamed of or lived, what the world taught.',
+    ch10_name: 'Beliefs & values', ch10_desc: 'What one believes deeply, what has changed, the principles that withstood everything.',
+    ch11_name: 'Regrets & pride', ch11_desc: 'What one would do differently, what one is secretly proud of — and never dared to say.',
+    ch12_name: 'The message', ch12_desc: 'What you want to say to future generations. Your advice. Your vision of the world.',
+    demo_eye: 'Interactive demo', demo_h2: 'Try it<br><em>now.</em>',
+    demo_sub: 'Choose a chapter, write your answer, and the AI generates a personalised follow-up question.',
+    shell_title: 'Heritage — Guided interview',
+    dg1: 'Choose a chapter', dg2: 'Answer the question', dg3: 'Click <strong>Go deeper</strong>',
+    ap_title: 'AI Analysis', ap_ph: 'Your insights will appear here after analysis.',
+    score_label: 'Narrative richness', ib_tone: 'Tone', ib_themes: 'Themes', ib_next_label: 'To explore',
+    follow_label: 'Follow-up question', deepen_btn: '✦ Go deeper', example_btn: 'See an example →',
+    ans_placeholder: 'Write freely... or dictate your answer. No right or wrong answer. Just your truth.',
+    voice_hint: 'Speak in English — transcription is instant',
+    pricing_eye: 'Investment', pricing_h2: 'A price for<br><em>eternity.</em>',
+    pricing_sub: 'Less than a dinner out. Infinitely more precious.',
+    plan1_period: 'per month', plan1_btn: 'Join the waitlist →',
+    f1_1: '12 guided chapters', f1_2: 'AI follow-up questions', f1_3: 'Interactive digital book',
+    f1_4: 'High-resolution PDF export', f1_5: 'Narrated audio version', f1_6: 'Printed & bound book',
+    plan2_period: 'per month · all included', plan2_btn: 'Priority access →',
+    f2_1: '12 guided chapters', f2_2: 'AI follow-up questions', f2_3: 'Interactive digital book',
+    f2_4: 'High-resolution PDF export', f2_5: 'Narrated audio version', f2_6: '1 printed & bound book / year',
+    pq_eye: 'For every family', pq_h2: 'Stories that<br><em>deserve to be told.</em>',
+    pq1_who: 'A gift for your parents',
+    pq1_scenario: 'Your mother is turning 70. She has lived so much — but never talks about it. Give her Heritage: she will answer at her own pace, alone, without pressure. And you will discover a woman you only knew half of.',
+    pq1_tag: '✦ A book your children will read in 30 years',
+    pq2_who: 'Before it\'s too late',
+    pq2_scenario: 'Your 80-year-old father has been through wars, exile, loss. He has never really spoken about it. Heritage asks the questions you don\'t dare to ask — gently, patiently, week by week.',
+    pq2_tag: '✦ Stories that would have been lost forever',
+    pq3_who: 'Your own legacy',
+    pq3_scenario: 'You have loved, endured, learned. Your grandchildren don\'t really know you — not yet. Heritage gives you the words to leave them what will matter most: you.',
+    pq3_tag: '✦ A message that will cross generations',
+    wl_eye: 'Waitlist', wl_h2: 'Be among<br><em>the first.</em>',
+    wl_sub: 'Heritage is being finalised. Leave your address — you\'ll receive your invitation first, with the pre-launch price locked in.',
+    wl_name_ph: 'Your first name', wl_email_ph: 'Your email address',
+    wl_btn: 'Join the waitlist →', wl_note: 'No spam · Unsubscribe in 1 click',
+    footer_copy: '© 2026 — Preserving what truly matters',
+    footer_legal: 'GDPR · Encryption · Your stories belong to you',
+    toast_signin: '✦ Access coming soon — sign up to be among the first',
+    deepen_new: '↻ New question',
+  }
+};
+
+let currentLang = 'fr';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  localStorage.setItem('heritage_lang', lang);
+  const btn = document.getElementById('langToggle');
+  if (btn) btn.textContent = lang === 'fr' ? 'EN' : 'FR';
+  const t = T[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.dataset.i18nPh;
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
+  // update connexion button onclick toast
+  const signinBtn = document.querySelector('.btn-nav-ghost');
+  if (signinBtn) {
+    signinBtn.onclick = () => {
+      document.getElementById('waitlist').scrollIntoView({behavior:'smooth'});
+      setTimeout(() => showToast(T[currentLang].toast_signin), 400);
+    };
+  }
+  // update active chapters array and chapter display
+  chapters = chaptersData[lang];
+  document.getElementById('chapTag').textContent = chapters[curChap].tag;
+  document.getElementById('qText').textContent = chapters[curChap].q;
+}
+
+function toggleLang() {
+  setLang(currentLang === 'fr' ? 'en' : 'fr');
+}
+
+/* ── CHAPITRES ── */
+const chaptersData = {
+  fr: [
+    { tag:"Chapitre I · Les origines",              q:'"D\'où vient votre famille ? Y a-t-il un pays, une région, une langue perdue ou gardée — et que ressentez-vous quand vous y pensez ?"' },
+    { tag:"Chapitre II · L\'enfance",               q:'"Quel est votre souvenir d\'enfance le plus vif — une image, une odeur, un son qui vous revient encore aujourd\'hui comme si c\'était hier ?"' },
+    { tag:"Chapitre III · La formation",            q:'"Y a-t-il un professeur, un mentor ou une rencontre qui a changé la direction de votre vie ? Qu\'est-ce qu\'il vous a appris ?"' },
+    { tag:"Chapitre IV · L\'amour",                 q:'"Comment avez-vous rencontré la personne qui a le plus compté dans votre vie ? Qu\'est-ce qui vous a frappé en premier ?"' },
+    { tag:"Chapitre V · Les épreuves",              q:'"Quelle est l\'épreuve la plus difficile que vous ayez traversée, et qu\'est-ce qu\'elle vous a appris sur vous-même ?"' },
+    { tag:"Chapitre VI · Le travail & la vocation", q:'"Quel est le travail dont vous êtes le plus fier — pas nécessairement le plus reconnu, mais celui qui vous a semblé le plus utile ou vrai ?"' },
+    { tag:"Chapitre VII · Les amitiés",             q:'"Y a-t-il un ami que vous n\'avez pas assez remercié, ou une amitié que vous avez laissé s\'éloigner et dont vous pensez encore ?"' },
+    { tag:"Chapitre VIII · La famille",             q:'"Qu\'est-ce que cela vous a appris sur vous-même, d\'être parent — ou d\'avoir été l\'enfant que vous avez été ?"' },
+    { tag:"Chapitre IX · Les voyages",              q:'"Y a-t-il un endroit dans le monde qui a changé quelque chose en vous — un voyage qui vous a rendu différent de celui qui était parti ?"' },
+    { tag:"Chapitre X · Les croyances & les valeurs", q:'"Qu\'est-ce en quoi vous croyez profondément — pas une religion nécessairement, mais une conviction qui a guidé vos choix toute votre vie ?"' },
+    { tag:"Chapitre XI · Les regrets & les fiertés",  q:'"Y a-t-il quelque chose dont vous êtes secrètement fier et que vous n\'avez jamais vraiment dit à voix haute ?"' },
+    { tag:"Chapitre XII · Le message",              q:'"Qu\'est-ce que vous voulez que vos petits-enfants sachent de vous — pas vos réalisations, mais qui vous étiez vraiment ?"' },
+  ],
+  en: [
+    { tag:"Chapter I · Origins",          q:'"Where does your family come from? Is there a country, a region, a language lost or kept — and how does it feel when you think about it?"' },
+    { tag:"Chapter II · Childhood",       q:'"What is your most vivid childhood memory — an image, a smell, a sound that comes back to you today as if it were yesterday?"' },
+    { tag:"Chapter III · Education",      q:'"Was there a teacher, mentor or encounter that changed the direction of your life? What did they teach you?"' },
+    { tag:"Chapter IV · Love",            q:'"How did you meet the person who has mattered most in your life? What struck you first?"' },
+    { tag:"Chapter V · Hardships",        q:'"What is the most difficult hardship you have been through, and what did it teach you about yourself?"' },
+    { tag:"Chapter VI · Work & vocation", q:'"What is the work you are most proud of — not necessarily the most recognised, but the one that felt most useful or true?"' },
+    { tag:"Chapter VII · Friendships",    q:'"Is there a friend you never thanked enough, or a friendship you let drift that you still think about?"' },
+    { tag:"Chapter VIII · Family",        q:'"What did it teach you about yourself, to be a parent — or to have been the child you were?"' },
+    { tag:"Chapter IX · Travels",         q:'"Is there a place in the world that changed something in you — a journey that left you different from the person who set out?"' },
+    { tag:"Chapter X · Beliefs",          q:'"What do you believe deeply — not necessarily a religion, but a conviction that has guided your choices throughout your life?"' },
+    { tag:"Chapter XI · Regrets & pride", q:'"Is there something you are secretly proud of that you have never really said out loud?"' },
+    { tag:"Chapter XII · The message",    q:'"What do you want your grandchildren to know about you — not your achievements, but who you truly were?"' },
+  ]
+};
+let chapters = chaptersData.fr; // active array — updated by setLang
 let curChap = 1;
+
+// Auto-detect on load — must run after chaptersData is declared
+(function() {
+  const saved = localStorage.getItem('heritage_lang');
+  const browserLang = (saved || navigator.language || 'fr').toLowerCase();
+  setLang(browserLang.startsWith('en') ? 'en' : 'fr');
+})();
 
 // Réponses hors-ligne par chapitre — utilisées si l'API n'est pas déployée
 const OFFLINE = [
@@ -1700,17 +2031,45 @@ async function fillExample() {
   deepen();
 }
 
+/* ── MENU MOBILE ── */
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn  = document.getElementById('hamburger');
+  const open = menu.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+
+function navTo(id) {
+  toggleMenu();
+  setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 260);
+}
+
+/* ── CHAPITRES ── */
+function applyChap(idx) {
+  curChap = idx;
+  const chapData = chaptersData[currentLang];
+  document.getElementById('chapTag').textContent = chapData[idx].tag;
+  document.getElementById('qText').textContent   = chapData[idx].q;
+  document.getElementById('ansText').value = '';
+  document.getElementById('aiFollow').style.display = 'none';
+  document.getElementById('wcDisplay').textContent   = '0 mot';
+  document.getElementById('deepenLabel').textContent = T[currentLang].deepen_btn;
+  resetAP();
+}
+
 function setChap(el, idx) {
   document.querySelectorAll('.sb-ch').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
-  curChap = idx;
-  document.getElementById('chapTag').textContent = chapters[idx].tag;
-  document.getElementById('qText').textContent = chapters[idx].q;
-  document.getElementById('ansText').value = '';
-  document.getElementById('aiFollow').style.display = 'none';
-  document.getElementById('wcDisplay').textContent = '0 mot';
-  document.getElementById('deepenLabel').textContent = '✦ Approfondir';
-  resetAP();
+  document.querySelectorAll('.mc-chip').forEach((c, i) => c.classList.toggle('active', i === idx));
+  applyChap(idx);
+}
+
+function setChapMobile(el, idx) {
+  document.querySelectorAll('.mc-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.sb-ch').forEach((c, i) => c.classList.toggle('active', i === idx));
+  applyChap(idx);
 }
 
 document.getElementById('ansText').addEventListener('input', function() {
@@ -1720,7 +2079,7 @@ document.getElementById('ansText').addEventListener('input', function() {
 
 async function deepen() {
   const txt = document.getElementById('ansText').value.trim();
-  if (txt.length < 15) { showToast('✦ Écrivez quelques lignes d\'abord...'); return; }
+  if (txt.length < 15) { showToast(currentLang === 'fr' ? '✦ Écrivez quelques lignes d\'abord...' : '✦ Write a few lines first...'); return; }
 
   const btn = document.getElementById('deepenBtn');
   const lbl = document.getElementById('deepenLabel');
@@ -1731,17 +2090,18 @@ async function deepen() {
 
   let p = null;
   const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.protocol === 'file:';
+  const activeChap = chaptersData[currentLang][curChap];
 
   if (!isLocal) {
     try {
-      const prompt = `Tu es un interviewer bienveillant expert en histoires de vie.\n\nChapitre : ${chapters[curChap].tag}\nQuestion : ${chapters[curChap].q}\nRéponse : "${txt}"\n\nGénère un JSON valide (sans markdown) :\n{\n  "followup": "<une seule question de suivi courte et profonde, ancrée dans la réponse, qui fait surgir un détail sensoriel ou émotionnel précis>",\n  "score": <1-10 richesse narrative>,\n  "emotion": "<1 phrase sur la tonalité émotionnelle>",\n  "themes": ["<thème1>","<thème2>","<thème3>"],\n  "next": "<1 courte suggestion sur ce qu\'il serait riche d\'explorer ensuite>"\n}\nTout en français.`;
+      const prompt = `Tu es un interviewer bienveillant expert en histoires de vie.\n\nChapitre : ${activeChap.tag}\nQuestion : ${activeChap.q}\nRéponse : "${txt}"\n\nGénère un JSON valide (sans markdown) :\n{\n  "followup": "<une seule question de suivi courte et profonde, ancrée dans la réponse, qui fait surgir un détail sensoriel ou émotionnel précis>",\n  "score": <1-10 richesse narrative>,\n  "emotion": "<1 phrase sur la tonalité émotionnelle>",\n  "themes": ["<thème1>","<thème2>","<thème3>"],\n  "next": "<1 courte suggestion sur ce qu\'il serait riche d\'explorer ensuite>"\n}\nTout en français.`;
       const res = await fetch('/api/deepen', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt })
       });
       if (res.status === 429) {
         btn.disabled = false; lbl.style.display = 'inline'; sp.style.display = 'none';
-        showToast('✦ Vous avez exploré la démo — rejoignez la liste d\'attente pour un accès complet');
+        showToast(currentLang === 'fr' ? '✦ Vous avez exploré la démo — rejoignez la liste d\'attente pour un accès complet' : '✦ You\'ve explored the demo — join the waitlist for full access');
         setTimeout(() => document.getElementById('waitlist').scrollIntoView({ behavior: 'smooth' }), 1200);
         return;
       }
@@ -1773,7 +2133,7 @@ async function deepen() {
   (p.themes || []).forEach(t => { const el = document.createElement('div'); el.className = 'th'; el.textContent = t; tr.appendChild(el); });
 
   btn.disabled = false; lbl.style.display = 'inline'; sp.style.display = 'none';
-  lbl.textContent = '↻ Nouvelle question';
+  lbl.textContent = T[currentLang].deepen_new;
 }
 
 function resetAP() {
@@ -1809,7 +2169,7 @@ function startRecording() {
   }
 
   recognition = new SpeechRec();
-  recognition.lang = 'fr-FR';
+  recognition.lang = currentLang === 'en' ? 'en-GB' : 'fr-FR';
   recognition.continuous = true;
   recognition.interimResults = true;
 
@@ -1840,7 +2200,7 @@ function startRecording() {
   const btn = document.getElementById('voiceBtn');
   btn.classList.add('recording');
   btn.innerHTML = '<span class="rec-dot"></span> Arrêter';
-  document.getElementById('voiceHint').textContent = 'Enregistrement en cours — parlez naturellement...';
+  document.getElementById('voiceHint').textContent = currentLang === 'fr' ? 'Enregistrement en cours — parlez naturellement...' : 'Recording — speak naturally...';
 }
 
 function stopRecording() {
@@ -1849,7 +2209,7 @@ function stopRecording() {
   const btn = document.getElementById('voiceBtn');
   btn.classList.remove('recording');
   btn.innerHTML = '🎙 Dicter';
-  document.getElementById('voiceHint').textContent = 'Parlez en français — la transcription est instantanée';
+  document.getElementById('voiceHint').textContent = T[currentLang].voice_hint;
 }
 
 /* ── WAITLIST ── */

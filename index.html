@@ -1226,7 +1226,7 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
         <div class="bk-spine"></div>
         <div class="bk-content">
           <span class="bk-ornament">✦</span>
-          <div class="bk-title">L'héritage de<br>Grand-mère<br>Suzanne</div>
+          <div class="bk-title" data-i18n-html="bk_title">L'héritage de<br>Grand-mère<br>Suzanne</div>
           <div class="bk-subtitle">1952 – 2024</div>
           <div class="bk-divider"></div>
           <div class="bk-name">S · M</div>
@@ -1312,8 +1312,8 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
 
       <div class="book-page">
         <div class="bp-header">
-          <span class="bp-chapter-label">Chapitre II</span>
-          <span class="bp-chapter-title">L'Enfance · Suzanne M.</span>
+          <span class="bp-chapter-label" data-i18n="bp_chap_label">Chapitre II</span>
+          <span class="bp-chapter-title" data-i18n="bp_chap_title">L'Enfance · Suzanne M.</span>
         </div>
         <div class="bp-page-rule"></div>
         <p class="bp-dropcap-para">
@@ -1479,51 +1479,51 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
           <div class="sb-label">Chapitres</div>
           <div class="sb-ch" onclick="setChap(this,0)">
             <span class="sb-ch-icon">🌍</span><div class="sb-ch-num">I</div>
-            <div class="sb-ch-name">Les origines</div>
+            <div class="sb-ch-name" data-i18n="ch1_name">Les origines</div>
           </div>
           <div class="sb-ch active" onclick="setChap(this,1)">
             <span class="sb-ch-icon">🌅</span><div class="sb-ch-num">II</div>
-            <div class="sb-ch-name">L'enfance</div>
+            <div class="sb-ch-name" data-i18n="ch2_name">L'enfance</div>
           </div>
           <div class="sb-ch" onclick="setChap(this,2)">
             <span class="sb-ch-icon">🎓</span><div class="sb-ch-num">III</div>
-            <div class="sb-ch-name">La formation</div>
+            <div class="sb-ch-name" data-i18n="ch3_name">La formation</div>
           </div>
           <div class="sb-ch" onclick="setChap(this,3)">
             <span class="sb-ch-icon">💛</span><div class="sb-ch-num">IV</div>
-            <div class="sb-ch-name">L'amour</div>
+            <div class="sb-ch-name" data-i18n="ch4_name">L'amour</div>
           </div>
           <div class="sb-ch" onclick="setChap(this,4)">
             <span class="sb-ch-icon">⚡</span><div class="sb-ch-num">V</div>
-            <div class="sb-ch-name">Les épreuves</div>
+            <div class="sb-ch-name" data-i18n="ch5_name">Les épreuves</div>
           </div>
           <div class="sb-ch" onclick="setChap(this,5)">
             <span class="sb-ch-icon">💼</span><div class="sb-ch-num">VI</div>
-            <div class="sb-ch-name">Le travail</div>
+            <div class="sb-ch-name" data-i18n="ch6_name">Le travail</div>
           </div>
           <div class="sb-ch" onclick="setChap(this,6)">
             <span class="sb-ch-icon">🤝</span><div class="sb-ch-num">VII</div>
-            <div class="sb-ch-name">Les amitiés</div>
+            <div class="sb-ch-name" data-i18n="ch7_name">Les amitiés</div>
           </div>
           <div class="sb-ch" onclick="setChap(this,7)">
             <span class="sb-ch-icon">👨‍👩‍👧</span><div class="sb-ch-num">VIII</div>
-            <div class="sb-ch-name">La famille</div>
+            <div class="sb-ch-name" data-i18n="ch8_name">La famille</div>
           </div>
           <div class="sb-ch" onclick="setChap(this,8)">
             <span class="sb-ch-icon">🌐</span><div class="sb-ch-num">IX</div>
-            <div class="sb-ch-name">Les voyages</div>
+            <div class="sb-ch-name" data-i18n="ch9_name">Les voyages</div>
           </div>
           <div class="sb-ch" onclick="setChap(this,9)">
             <span class="sb-ch-icon">🌿</span><div class="sb-ch-num">X</div>
-            <div class="sb-ch-name">Les croyances</div>
+            <div class="sb-ch-name" data-i18n="ch10_name">Les croyances</div>
           </div>
           <div class="sb-ch" onclick="setChap(this,10)">
             <span class="sb-ch-icon">🪞</span><div class="sb-ch-num">XI</div>
-            <div class="sb-ch-name">Les regrets</div>
+            <div class="sb-ch-name" data-i18n="ch11_name">Les regrets</div>
           </div>
           <div class="sb-ch" onclick="setChap(this,11)">
             <span class="sb-ch-icon">✉️</span><div class="sb-ch-num">XII</div>
-            <div class="sb-ch-name">Le message</div>
+            <div class="sb-ch-name" data-i18n="ch12_name">Le message</div>
           </div>
         </div>
 
@@ -1734,6 +1734,8 @@ const T = {
     bp_b2: '<strong>Mise en page éditoriale</strong> — Typographie soignée, chapitres clairs, prêt à être lu comme un vrai livre.',
     bp_b3: '<strong>Formats multiples</strong> — Livre numérique interactif, PDF haute résolution, et version audio narratée.',
     bp_b4: '<strong>Vos mots, pour toujours</strong> — Hébergé en sécurité, accessible à votre famille pour les générations à venir.',
+    bk_title: 'L\'héritage de<br>Grand-mère<br>Suzanne',
+    bp_chap_label: 'Chapitre II', bp_chap_title: 'L\'Enfance · Suzanne M.',
     bp_tag: '↓ Aperçu d\'un chapitre finalisé',
     ch_eye: 'Les chapitres', ch_h2: 'Une vie entière,<br><em>chapitre par chapitre.</em>',
     ch_sub: 'Douze domaines essentiels, des centaines de questions conçues pour faire surgir la sagesse de chaque vie.',
@@ -1810,6 +1812,8 @@ const T = {
     bp_b2: '<strong>Editorial layout</strong> — Refined typography, clear chapters, ready to read like a real book.',
     bp_b3: '<strong>Multiple formats</strong> — Interactive digital book, high-resolution PDF, and narrated audio version.',
     bp_b4: '<strong>Your words, forever</strong> — Securely hosted, accessible to your family for generations to come.',
+    bk_title: 'The legacy of<br>Grandmother<br>Suzanne',
+    bp_chap_label: 'Chapter II', bp_chap_title: 'Childhood · Suzanne M.',
     bp_tag: '↓ Preview of a completed chapter',
     ch_eye: 'The chapters', ch_h2: 'An entire life,<br><em>chapter by chapter.</em>',
     ch_sub: 'Twelve essential areas, hundreds of questions designed to bring out the wisdom in every life.',
@@ -1939,8 +1943,7 @@ let curChap = 1;
 // Auto-detect on load — must run after chaptersData is declared
 (function() {
   const saved = localStorage.getItem('heritage_lang');
-  const browserLang = (saved || navigator.language || 'fr').toLowerCase();
-  setLang(browserLang.startsWith('en') ? 'en' : 'fr');
+  setLang(saved === 'en' ? 'en' : 'fr');
 })();
 
 // Réponses hors-ligne par chapitre — utilisées si l'API n'est pas déployée

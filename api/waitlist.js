@@ -1,6 +1,6 @@
-import { Redis } from '@upstash/redis';
+import Redis from 'ioredis';
 
-const redis = Redis.fromEnv();
+const redis = new Redis(process.env.REDIS_URL);
 
 export default async function handler(req, res) {
   if (req.method === 'OPTIONS') {
@@ -21,13 +21,7 @@ export default async function handler(req, res) {
     createdAt: new Date().toISOString(),
   };
 
-  // Store in sorted set (score = timestamp for ordering), keyed by email to avoid duplicates
-  await redis.zadd('waitlist', {
-    score: Date.now(),
-    member: JSON.stringify(entry),
-  });
-
-  // Also store email as a simple key to detect duplicates on next visit
+  await redis.zadd('waitlist', Date.now(), JSON.stringify(entry));
   await redis.set(`wl:${entry.email}`, entry.createdAt);
 
   res.status(200).json({ ok: true });

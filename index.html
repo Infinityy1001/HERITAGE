@@ -946,43 +946,46 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
 
 /* ─── MOBILE MENU ─── */
 .mobile-menu { display: none; }
-.mobile-menu.open { display: block; }
-.mm-panel {
-  position: fixed; inset: 0; z-index: 1000;
-  background: var(--cream);
-  display: flex; flex-direction: column;
-  padding: env(safe-area-inset-top, 28px) 32px 40px;
-  padding-top: max(env(safe-area-inset-top), 28px);
-  animation: mmSlide 0.28s cubic-bezier(0.4,0,0.2,1);
-  overflow-y: auto;
+.mobile-menu.open { display: flex; }
+.mm-overlay {
+  position: fixed; inset: 0; z-index: 998;
+  background: rgba(26,21,16,0.55);
 }
-@keyframes mmSlide { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.mm-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 999;
+  width: 280px; background: var(--cream);
+  display: flex; flex-direction: column;
+  padding: 32px 28px max(env(safe-area-inset-bottom,0px),32px);
+  animation: mmSlide 0.26s cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes mmSlide { from { transform: translateX(100%); } to { transform: translateX(0); } }
 .mm-top {
   display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 52px;
+  margin-bottom: 40px;
 }
 .mm-logo {
-  font-family: 'Cormorant Garamond', serif; font-size: 18px;
+  font-family: 'Cormorant Garamond', serif; font-size: 16px;
   font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: var(--ink);
 }
 .mm-close {
-  background: none; border: none; cursor: pointer; font-size: 24px;
+  background: none; border: none; cursor: pointer; font-size: 20px;
   color: var(--muted); padding: 4px 8px; transition: color 0.2s; line-height: 1;
 }
 .mm-close:hover { color: var(--ink); }
-.mm-nav { display: flex; flex-direction: column; flex: 1; }
+.mm-nav { display: flex; flex-direction: column; }
 .mm-nav a {
-  font-family: 'Cormorant Garamond', serif; font-size: 36px;
+  font-family: 'Cormorant Garamond', serif; font-size: 26px;
   font-weight: 300; font-style: italic; color: var(--ink);
   text-decoration: none; cursor: pointer;
-  padding: 18px 0; border-bottom: 1px solid var(--border);
+  padding: 14px 0; border-bottom: 1px solid var(--border);
   transition: color 0.15s;
 }
 .mm-nav a:hover, .mm-nav a:active { color: var(--gold); }
 .mm-cta {
-  margin-top: 44px; font-size: 11px; font-weight: 500; letter-spacing: 2.5px;
+  margin-top: auto; padding-top: 32px;
+  font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
   text-transform: uppercase; color: var(--cream); background: var(--ink);
-  border: none; cursor: pointer; padding: 18px 24px;
+  border: none; cursor: pointer; padding: 15px 20px;
   font-family: 'Jost', sans-serif; transition: background 0.2s;
 }
 .mm-cta:hover { background: var(--gold); }
@@ -1167,6 +1170,7 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
 
 <!-- MENU MOBILE -->
 <div class="mobile-menu" id="mobileMenu">
+  <div class="mm-overlay" onclick="toggleMenu()"></div>
   <div class="mm-panel">
     <div class="mm-top">
       <span class="mm-logo">Héritage</span>

@@ -443,15 +443,19 @@ h1 em {
   border-right: 1px solid var(--border);
   padding: 28px 0;
   background: var(--cream);
+  overflow-y: auto; max-height: 560px;
 }
+.sb::-webkit-scrollbar { width: 3px; }
+.sb::-webkit-scrollbar-thumb { background: var(--border2); }
 .sb-label {
   font-size: 10px; font-weight: 500; letter-spacing: 3px;
   text-transform: uppercase; color: var(--muted);
   padding: 0 20px 16px; font-family: 'Jost', sans-serif;
 }
+.sb-ch-icon { font-size: 15px; flex-shrink: 0; width: 22px; text-align: center; }
 .sb-ch {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 20px; cursor: pointer; transition: all 0.15s;
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 16px; cursor: pointer; transition: all 0.15s;
   border-left: 2px solid transparent;
 }
 .sb-ch:hover { background: var(--cream2); }
@@ -950,6 +954,43 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
   font-size: 12px; color: var(--muted); font-style: italic;
   font-family: 'Cormorant Garamond', serif;
 }
+
+/* ─── DEMO GUIDE BAR ─── */
+.demo-guide {
+  display: flex; align-items: stretch; justify-content: center;
+  margin-bottom: 36px; flex-wrap: wrap;
+}
+.dg-step {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 28px;
+  background: var(--white); border: 1px solid var(--border);
+}
+.dg-step + .dg-step { border-left: none; }
+.dg-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--ink); color: var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 500; font-family: 'Jost', sans-serif;
+  flex-shrink: 0;
+}
+.dg-text {
+  font-size: 13px; font-weight: 400; color: var(--ink2);
+  font-family: 'Jost', sans-serif; white-space: nowrap;
+}
+.dg-text strong { font-weight: 500; color: var(--ink); }
+
+/* ─── EXAMPLE BUTTON ─── */
+.btn-example {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; font-style: italic; color: var(--gold);
+  background: none; border: none; cursor: pointer; padding: 0;
+  text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-color: rgba(184,146,42,0.35);
+  transition: color 0.2s;
+}
+.btn-example:hover { color: var(--gold2); }
+.btn-deepen.pulse { animation: deepPulse 0.8s ease-in-out 2; }
+@keyframes deepPulse { 0%,100%{box-shadow:0 0 0 0 rgba(184,146,42,0)} 50%{box-shadow:0 0 0 8px rgba(184,146,42,0.25)} }
 </style>
 </head>
 <body>
@@ -1237,6 +1278,12 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
       </div>
     </div>
 
+    <div class="demo-guide">
+      <div class="dg-step"><div class="dg-num">1</div><span class="dg-text">Choisissez un chapitre</span></div>
+      <div class="dg-step"><div class="dg-num">2</div><span class="dg-text">Répondez à la question</span></div>
+      <div class="dg-step"><div class="dg-num">3</div><span class="dg-text">Cliquez <strong>Approfondir</strong></span></div>
+    </div>
+
     <div class="shell">
       <div class="shell-bar">
         <div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div>
@@ -1248,28 +1295,51 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
         <div class="sb">
           <div class="sb-label">Chapitres</div>
           <div class="sb-ch" onclick="setChap(this,0)">
-            <div class="sb-ch-num">I</div>
+            <span class="sb-ch-icon">🌍</span><div class="sb-ch-num">I</div>
             <div class="sb-ch-name">Les origines</div>
           </div>
           <div class="sb-ch active" onclick="setChap(this,1)">
-            <div class="sb-ch-num">II</div>
+            <span class="sb-ch-icon">🌅</span><div class="sb-ch-num">II</div>
             <div class="sb-ch-name">L'enfance</div>
-            <div class="sb-ch-tick">✦</div>
           </div>
           <div class="sb-ch" onclick="setChap(this,2)">
-            <div class="sb-ch-num">III</div>
-            <div class="sb-ch-name">L'amour</div>
+            <span class="sb-ch-icon">🎓</span><div class="sb-ch-num">III</div>
+            <div class="sb-ch-name">La formation</div>
           </div>
           <div class="sb-ch" onclick="setChap(this,3)">
-            <div class="sb-ch-num">IV</div>
-            <div class="sb-ch-name">Les épreuves</div>
+            <span class="sb-ch-icon">💛</span><div class="sb-ch-num">IV</div>
+            <div class="sb-ch-name">L'amour</div>
           </div>
           <div class="sb-ch" onclick="setChap(this,4)">
-            <div class="sb-ch-num">V</div>
-            <div class="sb-ch-name">La sagesse</div>
+            <span class="sb-ch-icon">⚡</span><div class="sb-ch-num">V</div>
+            <div class="sb-ch-name">Les épreuves</div>
           </div>
           <div class="sb-ch" onclick="setChap(this,5)">
-            <div class="sb-ch-num">VI</div>
+            <span class="sb-ch-icon">💼</span><div class="sb-ch-num">VI</div>
+            <div class="sb-ch-name">Le travail</div>
+          </div>
+          <div class="sb-ch" onclick="setChap(this,6)">
+            <span class="sb-ch-icon">🤝</span><div class="sb-ch-num">VII</div>
+            <div class="sb-ch-name">Les amitiés</div>
+          </div>
+          <div class="sb-ch" onclick="setChap(this,7)">
+            <span class="sb-ch-icon">👨‍👩‍👧</span><div class="sb-ch-num">VIII</div>
+            <div class="sb-ch-name">La famille</div>
+          </div>
+          <div class="sb-ch" onclick="setChap(this,8)">
+            <span class="sb-ch-icon">🌐</span><div class="sb-ch-num">IX</div>
+            <div class="sb-ch-name">Les voyages</div>
+          </div>
+          <div class="sb-ch" onclick="setChap(this,9)">
+            <span class="sb-ch-icon">🌿</span><div class="sb-ch-num">X</div>
+            <div class="sb-ch-name">Les croyances</div>
+          </div>
+          <div class="sb-ch" onclick="setChap(this,10)">
+            <span class="sb-ch-icon">🪞</span><div class="sb-ch-num">XI</div>
+            <div class="sb-ch-name">Les regrets</div>
+          </div>
+          <div class="sb-ch" onclick="setChap(this,11)">
+            <span class="sb-ch-icon">✉️</span><div class="sb-ch-num">XII</div>
             <div class="sb-ch-name">Le message</div>
           </div>
         </div>
@@ -1305,7 +1375,7 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
           </div>
 
           <div class="ed-footer">
-            <div></div>
+            <button class="btn-example" onclick="fillExample()">Voir un exemple →</button>
             <button class="btn-deepen" id="deepenBtn" onclick="deepen()">
               <span id="deepenLabel">✦ Approfondir</span>
               <div class="spin-sm" id="deepenSpin"></div>
@@ -1455,36 +1525,108 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
 
 <script>
 const chapters = [
-  { tag:"Chapitre I · Les origines",   q:'"D\'où vient votre famille ? Y a-t-il un pays, une région, une langue perdue ou gardée — et que ressentez-vous quand vous y pensez ?"' },
-  { tag:"Chapitre II · L'enfance",     q:'"Quel est votre souvenir d\'enfance le plus vif — une image, une odeur, un son qui vous revient encore aujourd\'hui comme si c\'était hier ?"' },
-  { tag:"Chapitre III · L'amour",      q:'"Comment avez-vous rencontré la personne qui a le plus compté dans votre vie ? Qu\'est-ce qui vous a frappé en premier ?"' },
-  { tag:"Chapitre IV · Les épreuves",  q:'"Quelle est l\'épreuve la plus difficile que vous ayez traversée, et qu\'est-ce qu\'elle vous a appris sur vous-même ?"' },
-  { tag:"Chapitre V · La sagesse",     q:'"Si vous pouviez glisser un seul conseil dans la poche de votre moi de 20 ans — lequel serait-ce ?"' },
-  { tag:"Chapitre VI · Le message",    q:'"Qu\'est-ce que vous voulez que vos petits-enfants sachent de vous — pas vos réalisations, mais qui vous étiez vraiment ?"' },
+  { tag:"Chapitre I · Les origines",              q:'"D\'où vient votre famille ? Y a-t-il un pays, une région, une langue perdue ou gardée — et que ressentez-vous quand vous y pensez ?"' },
+  { tag:"Chapitre II · L\'enfance",               q:'"Quel est votre souvenir d\'enfance le plus vif — une image, une odeur, un son qui vous revient encore aujourd\'hui comme si c\'était hier ?"' },
+  { tag:"Chapitre III · La formation",            q:'"Y a-t-il un professeur, un mentor ou une rencontre qui a changé la direction de votre vie ? Qu\'est-ce qu\'il vous a appris ?"' },
+  { tag:"Chapitre IV · L\'amour",                 q:'"Comment avez-vous rencontré la personne qui a le plus compté dans votre vie ? Qu\'est-ce qui vous a frappé en premier ?"' },
+  { tag:"Chapitre V · Les épreuves",              q:'"Quelle est l\'épreuve la plus difficile que vous ayez traversée, et qu\'est-ce qu\'elle vous a appris sur vous-même ?"' },
+  { tag:"Chapitre VI · Le travail & la vocation", q:'"Quel est le travail dont vous êtes le plus fier — pas nécessairement le plus reconnu, mais celui qui vous a semblé le plus utile ou vrai ?"' },
+  { tag:"Chapitre VII · Les amitiés",             q:'"Y a-t-il un ami que vous n\'avez pas assez remercié, ou une amitié que vous avez laissé s\'éloigner et dont vous pensez encore ?"' },
+  { tag:"Chapitre VIII · La famille",             q:'"Qu\'est-ce que cela vous a appris sur vous-même, d\'être parent — ou d\'avoir été l\'enfant que vous avez été ?"' },
+  { tag:"Chapitre IX · Les voyages",              q:'"Y a-t-il un endroit dans le monde qui a changé quelque chose en vous — un voyage qui vous a rendu différent de celui qui était parti ?"' },
+  { tag:"Chapitre X · Les croyances & les valeurs", q:'"Qu\'est-ce en quoi vous croyez profondément — pas une religion nécessairement, mais une conviction qui a guidé vos choix toute votre vie ?"' },
+  { tag:"Chapitre XI · Les regrets & les fiertés",  q:'"Y a-t-il quelque chose dont vous êtes secrètement fier et que vous n\'avez jamais vraiment dit à voix haute ?"' },
+  { tag:"Chapitre XII · Le message",              q:'"Qu\'est-ce que vous voulez que vos petits-enfants sachent de vous — pas vos réalisations, mais qui vous étiez vraiment ?"' },
 ];
 let curChap = 1;
 
 // Réponses hors-ligne par chapitre — utilisées si l'API n'est pas déployée
 const OFFLINE = [
-  [// Les origines
-    { followup:"Vous avez mentionné ce lieu — pourriez-vous me décrire un objet précis, une odeur, une couleur que vous revoyez encore aujourd'hui dans cette maison familiale ?", score:8, emotion:"Une nostalgie douce, ancrée dans des détails sensoriels précis et longtemps refoulés.", themes:["Racines","Identité","Héritage"], next:"Explorez les langues et traditions qui se sont transmises — ou qui se sont perdues — dans votre famille au fil des générations." }
+  [// I — Les origines
+    { followup:"Vous avez mentionné ce lieu — pourriez-vous me décrire un objet précis, une odeur, une couleur que vous revoyez encore aujourd'hui ?", score:8, emotion:"Une nostalgie douce, ancrée dans des détails sensoriels précis et longtemps refoulés.", themes:["Racines","Identité","Héritage"], next:"Explorez les langues et traditions qui se sont transmises — ou perdues — dans votre famille au fil des générations." }
   ],
-  [// L'enfance
+  [// II — L'enfance
     { followup:"Cette image si vive — qui d'autre était présent dans cet instant précis ? Que faisaient-ils, et comment vous sentiez-vous parmi eux ?", score:9, emotion:"Une tendresse pure pour une époque révolue, portée par des sensations encore intactes.", themes:["Enfance","Mémoire sensorielle","Sécurité"], next:"Décrivez la maison de votre enfance pièce par pièce — ses bruits, ses lumières, ses odeurs particulières." }
   ],
-  [// L'amour
+  [// III — La formation
+    { followup:"Ce que cette personne vous a dit — vous en souvenez-vous dans des mots précis ? Quelle phrase exactement a changé quelque chose en vous ?", score:8, emotion:"Une reconnaissance tardive, mêlée d'une légère mélancolie pour ce qui n'a peut-être jamais été dit.", themes:["Formation","Transmission","Vocation"], next:"Y a-t-il un chemin que vous n'avez pas emprunté à cette époque, et qui vous revient encore comme une question ouverte ?" }
+  ],
+  [// IV — L'amour
     { followup:"Ce premier moment ensemble — qu'est-ce qui vous a fait comprendre que cette personne était différente de toutes les autres ?", score:8, emotion:"Un émerveillement intact, comme si ce souvenir avait résisté au temps sans s'altérer.", themes:["Amour","Rencontre","Évidence"], next:"Racontez le moment précis où vous avez réalisé que vous étiez amoureux·se — pas la rencontre, mais la révélation intérieure." }
   ],
-  [// Les épreuves
+  [// V — Les épreuves
     { followup:"Au cœur de cette période, y a-t-il eu une personne, une phrase, un instant précis qui vous a redonné la force de continuer ?", score:9, emotion:"Une résilience profonde, portée avec une discrétion qui la rend encore plus touchante.", themes:["Résilience","Courage","Transformation intérieure"], next:"Qu'est-ce que cette épreuve a changé dans votre façon de voir les autres — ou de vous voir vous-même ?" }
   ],
-  [// La sagesse
-    { followup:"Ce conseil — d'où vient-il vraiment ? Quelle expérience précise vous l'a enseigné, souvent à vos dépens ?", score:8, emotion:"Une bienveillance profonde envers soi-même, acquise au prix de la vie vécue.", themes:["Sagesse","Apprentissage","Regrets apaisés"], next:"Y a-t-il quelque chose que vous avez mis des décennies à comprendre, et que vous auriez aimé savoir à 20 ans ?" }
+  [// VI — Le travail & la vocation
+    { followup:"Dans ce travail, y a-t-il eu un moment précis où vous vous êtes dit : 'C'est pour ça que je suis là' — une journée, une rencontre, un accomplissement ?", score:8, emotion:"Une fierté discrète mais solide, ancrée dans le concret de ce qui a été construit avec les mains ou l'esprit.", themes:["Vocation","Travail","Sens"], next:"Y a-t-il une ambition que vous aviez jeune et que vous avez abandonnée — sans regret ou avec ?" }
   ],
-  [// Le message
+  [// VII — Les amitiés
+    { followup:"Si vous pouviez lui écrire une lettre aujourd'hui — pas pour expliquer, juste pour lui dire ce qui compte — par quoi commenceriez-vous ?", score:8, emotion:"Une affection silencieuse pour des liens que le temps a distendus sans les rompre.", themes:["Amitié","Fidélité","Regret doux"], next:"Y a-t-il un ami qui vous connaît mieux que votre famille — et pourquoi cette amitié a-t-elle eu cette profondeur particulière ?" }
+  ],
+  [// VIII — La famille & la parentalité
+    { followup:"Y a-t-il un moment précis avec vos enfants où vous avez senti le poids et la beauté de cette transmission, comme un fil tendu à travers les générations ?", score:9, emotion:"Un amour dense, fait de fierté et de vulnérabilité mêlées, qui cherche ses mots depuis longtemps.", themes:["Parentalité","Transmission","Famille"], next:"Qu'est-ce que vous avez voulu transmettre — et qu'est-ce que vous craignez de n'avoir pas su donner ?" }
+  ],
+  [// IX — Les voyages & les horizons
+    { followup:"Dans cet endroit — y a-t-il eu un moment précis, une image, une rencontre qui a cristallisé quelque chose en vous ?", score:8, emotion:"Un sens de l'ailleurs et de la vastitude du monde, qui illumine encore le quotidien.", themes:["Voyage","Découverte","Ouverture"], next:"Y a-t-il un endroit où vous n'êtes jamais allé et qui vous attire encore — un rêve resté ouvert ?" }
+  ],
+  [// X — Les croyances & les valeurs
+    { followup:"Cette conviction — d'où vient-elle ? Y a-t-il un événement ou une douleur précise qui vous l'a enseignée, souvent à vos dépens ?", score:8, emotion:"Une intégrité profonde, forgée dans l'expérience plutôt que dans les dogmes.", themes:["Valeurs","Conviction","Intégrité"], next:"Y a-t-il quelque chose en quoi vous croyiez jadis, et que la vie vous a appris à voir différemment ?" }
+  ],
+  [// XI — Les regrets & les fiertés
+    { followup:"Cette fierté — pourquoi est-elle restée silencieuse ? Qu'est-ce qui vous a empêché de la nommer, de la partager avec ceux que vous aimez ?", score:9, emotion:"Une dignité tranquille qui méritait depuis longtemps d'être reconnue à voix haute.", themes:["Fierté","Pudeur","Accomplissement"], next:"Y a-t-il quelque chose que vous auriez fait différemment — non par regret, mais pour mieux comprendre ce qui comptait vraiment ?" }
+  ],
+  [// XII — Le message
     { followup:"Au-delà des mots — quelle émotion voulez-vous qu'ils ressentent en vous lisant ? Pas ce qu'ils apprendront, mais ce qu'ils ressentiront.", score:9, emotion:"Un amour silencieux qui traverse les générations, exprimé ici pour la première fois.", themes:["Transmission","Amour familial","Héritage"], next:"Imaginez votre arrière-petit-enfant qui lit ces mots dans 50 ans — que voulez-vous qu'il sache de vous, de votre époque, de votre façon d'aimer ?" }
   ],
 ];
+
+// Exemples pré-écrits pour la démo — un par chapitre
+const EXAMPLES = [
+  // I — Les origines
+  "Ma famille vient du Portugal, d'un petit village de l'Alentejo que je n'ai vu qu'en photo. Mon grand-père est arrivé en France en 1963 avec une valise en carton et vingt mots de français. Il n'a jamais vraiment appris à parler sans accent — mais cet accent, pour nous, c'était la maison.",
+  // II — L'enfance
+  "L'odeur du pain grillé le matin dans la maison de mes parents à Lyon. Ma mère se levait avant tout le monde — j'entendais le bruit de ses pantoufles sur le carrelage, le cliquetis de la cafetière. Il y avait quelque chose d'indestructible dans ce rituel. Nous étions quatre dans soixante-deux mètres carrés. À cet âge-là, l'espace n'est pas une question de mètres — c'est une question de sécurité.",
+  // III — La formation
+  "Monsieur Lambert, mon professeur de philosophie en terminale. Il nous disait que penser, c'est douter de ce qu'on croit savoir. Un jour il m'a rendu une copie avec juste une phrase écrite en rouge : 'Vous avez quelque chose à dire — osez le dire.' J'ai mis vingt ans à comprendre ce que ça voulait dire.",
+  // IV — L'amour
+  "Je l'ai rencontré un soir d'hiver à une fête où je n'avais pas envie d'aller. Il riait — un rire que j'ai reconnu avant même de le voir. On a parlé jusqu'à trois heures du matin sans s'en rendre compte, debout près du buffet, les autres partis depuis longtemps. Le lendemain je ne pensais plus qu'à cette voix.",
+  // V — Les épreuves
+  "Quand mon père est tombé malade, j'avais trente-quatre ans et deux jeunes enfants. Pendant deux ans, j'ai géré tout — les médecins, les papiers, les nuits sans dormir. Ce qui m'a le plus surpris, c'est de découvrir une force en moi que je ne soupçonnais pas. Et d'apprendre que demander de l'aide, c'est aussi une forme de courage.",
+  // VI — Le travail
+  "J'ai été institutrice pendant trente-et-un ans. La fierté dont je suis la plus fière : un gamin de CM2 qui ne lisait pas en juin. En septembre de l'année suivante, sa mère m'a arrêtée dans la rue pour me dire qu'il avait lu son premier livre seul, dans sa chambre, pour le plaisir. Je n'ai jamais oublié ce moment.",
+  // VII — Les amitiés
+  "Patrick et moi, on s'est connus à quinze ans dans le même immeuble. On ne s'est plus parlé pendant huit ans après une dispute dont je ne me souviens même plus vraiment de la raison. On s'est retrouvés par hasard dans un aéroport à Barcelone. On a repris là où on s'était arrêtés, comme si les huit ans n'avaient pas eu lieu.",
+  // VIII — La famille
+  "La première fois que ma fille m'a appelé 'papa' — pas 'da-da', vraiment 'papa' en me regardant droit dans les yeux. J'ai dû sortir de la pièce pour qu'elle ne me voie pas. Je n'aurais jamais imaginé que quelque chose d'aussi simple puisse faire autant d'effet sur un homme de quarante ans.",
+  // IX — Les voyages
+  "Je suis allé au Maroc seul à vingt-deux ans, avec presque pas d'argent. Un soir à Fès, perdu dans la médina, un vieil homme m'a invité à dîner chez lui sans que je lui aie rien demandé. Sa femme, ses enfants, sa table. Cette générosité-là m'a changé quelque chose dans la façon de voir les étrangers — et de l'être moi-même.",
+  // X — Les croyances
+  "Je crois que chaque personne porte quelque chose d'irremplaçable — une lumière particulière — et que notre travail est de ne pas l'éteindre chez ceux qu'on aime. Je n'ai pas toujours été à la hauteur de cette conviction. Mais elle m'a guidé, même dans les moments où je n'y croyais plus vraiment.",
+  // XI — Les regrets & fiertés
+  "J'ai élevé mes deux fils seule après le divorce. Pas d'aide, pas de pension pendant des années. Ils sont aujourd'hui des hommes bien — attentionnés, honnêtes, capables de pleurer. Personne ne sait vraiment ce que ça m'a coûté. Ni ce que ça vaut.",
+  // XII — Le message
+  "Je voudrais qu'ils sachent que j'ai essayé. Que je n'ai pas toujours réussi, que j'ai fait des erreurs dont j'aurais voulu les protéger. Mais que chaque choix, même les mauvais, venait d'un endroit d'amour. Que l'amour était là, même quand les mots manquaient.",
+];
+
+async function fillExample() {
+  const ta = document.getElementById('ansText');
+  const text = EXAMPLES[curChap] || EXAMPLES[0];
+  ta.value = '';
+  ta.focus();
+  // Frappe progressive — effet machine à écrire
+  for (let i = 0; i < text.length; i++) {
+    ta.value += text[i];
+    const n = ta.value.trim().split(/\s+/).filter(Boolean).length;
+    document.getElementById('wcDisplay').textContent = n + (n < 2 ? ' mot' : ' mots');
+    await new Promise(r => setTimeout(r, 14 + Math.random() * 10));
+  }
+  // Pulse sur le bouton Approfondir, puis lancement auto
+  const btn = document.getElementById('deepenBtn');
+  btn.classList.add('pulse');
+  await new Promise(r => setTimeout(r, 900));
+  btn.classList.remove('pulse');
+  deepen();
+}
 
 function setChap(el, idx) {
   document.querySelectorAll('.sb-ch').forEach(c => c.classList.remove('active'));

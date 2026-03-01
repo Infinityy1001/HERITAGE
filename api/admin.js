@@ -1,7 +1,7 @@
 import Redis from 'ioredis';
 
 const redis = new Redis(process.env.REDIS_URL);
-const SECRET = process.env.ADMIN_SECRET || 'heritage2026';
+const SECRET = process.env.ADMIN_SECRET;
 
 export default async function handler(req, res) {
   if (req.query.key !== SECRET) {

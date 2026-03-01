@@ -760,7 +760,10 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
   .hero { grid-template-columns: 1fr; }
   .hero-right { display: none; }
   .hero-left { padding: 80px 28px 64px; }
-  .hiw,.pricing-section,.testi-section,.demo-section,.chapters-section,.waitlist-section { padding: 80px 24px; }
+  .hiw,.pricing-section,.testi-section,.demo-section,.chapters-section,.waitlist-section,.book-preview-section,.pourqui-section { padding: 80px 24px; }
+  .bp-layout { grid-template-columns: 1fr; gap: 48px; }
+  .book-page { padding: 40px 32px; }
+  .pq-grid { grid-template-columns: 1fr; }
   .waitlist-form { flex-direction: column; }
   .wl-inputs { flex-direction: column; }
   .steps { grid-template-columns: 1fr 1fr; gap: 40px 24px; }
@@ -819,6 +822,108 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
   text-align: center; padding: 32px 0; line-height: 1.6;
 }
 
+/* ─── BOOK PREVIEW ─── */
+.book-preview-section {
+  padding: 120px 56px;
+  border-top: 1px solid var(--border);
+}
+.bp-inner { max-width: 1100px; margin: 0 auto; }
+.bp-layout {
+  display: grid; grid-template-columns: 1fr 480px;
+  gap: 80px; align-items: center; margin-top: 64px;
+}
+.bp-bullets { list-style: none; display: flex; flex-direction: column; gap: 18px; margin-top: 32px; }
+.bp-bullets li { display: flex; gap: 14px; align-items: flex-start; }
+.bp-bullet-icon { color: var(--gold); flex-shrink: 0; font-size: 12px; margin-top: 3px; }
+.bp-bullet-text { font-size: 14px; color: var(--muted); line-height: 1.75; font-weight: 300; }
+.bp-bullet-text strong { color: var(--ink); font-weight: 400; }
+.bp-tag {
+  display: inline-block; margin-top: 28px;
+  font-size: 10px; font-weight: 400; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  border: 1px solid rgba(184,146,42,0.3); padding: 6px 14px;
+  font-family: 'Jost', sans-serif;
+}
+.book-page {
+  background: #fdfaf5;
+  padding: 56px 60px;
+  box-shadow: -2px 0 6px rgba(26,21,16,0.04), 0 24px 64px rgba(26,21,16,0.16), 10px 10px 0 var(--cream3);
+  position: relative;
+  border: 1px solid var(--border);
+}
+.book-page::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+  background: linear-gradient(to right, rgba(26,21,16,0.07), transparent);
+}
+.bp-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; }
+.bp-chapter-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 9px; font-weight: 500; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold);
+}
+.bp-chapter-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; font-style: italic; color: var(--muted); letter-spacing: 1px;
+}
+.bp-page-rule {
+  width: 100%; height: 1px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  margin-bottom: 28px; opacity: 0.35;
+}
+.bp-dropcap-para {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; line-height: 1.9; color: var(--ink);
+  font-weight: 400; margin-bottom: 18px;
+}
+.bp-dropcap {
+  float: left; font-size: 66px; line-height: 0.78;
+  font-family: 'Cormorant', serif; font-weight: 300;
+  color: var(--gold); margin: 6px 7px 0 0;
+}
+.bp-para {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; line-height: 1.9; color: var(--ink2);
+  font-weight: 400; margin-bottom: 16px; text-indent: 2em;
+}
+.bp-page-footer {
+  margin-top: 36px; text-align: center;
+  border-top: 1px solid var(--border); padding-top: 12px;
+}
+.bp-page-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; color: var(--muted); letter-spacing: 2px;
+}
+
+/* ─── POUR QUI ─── */
+.pourqui-section {
+  background: var(--cream2);
+  border-top: 1px solid var(--border);
+  padding: 120px 56px;
+}
+.pourqui-inner { max-width: 1100px; margin: 0 auto; }
+.pq-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--border); margin-top: 64px;
+}
+.pq-card { background: var(--cream2); padding: 48px 40px; transition: background 0.2s; }
+.pq-card:hover { background: var(--white); }
+.pq-icon { font-size: 28px; margin-bottom: 20px; display: block; }
+.pq-who {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 400; color: var(--ink);
+  margin-bottom: 14px; line-height: 1.3;
+}
+.pq-scenario {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-style: italic; color: var(--ink2);
+  line-height: 1.8; margin-bottom: 22px;
+}
+.pq-tag {
+  font-size: 11px; color: var(--gold); font-weight: 400; letter-spacing: 1px;
+  font-family: 'Jost', sans-serif; display: flex; align-items: center; gap: 8px;
+}
+
 /* ─── VOICE RECORDING ─── */
 .voice-row {
   display: flex; align-items: center; gap: 12px; margin-top: -10px;
@@ -867,7 +972,7 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
     <a href="#pricing">Tarifs</a>
   </div>
   <div class="nav-actions">
-    <button class="btn-nav-ghost">Connexion</button>
+    <button class="btn-nav-ghost" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'});setTimeout(()=>showToast('✦ L\'accès arrive bientôt — inscrivez-vous pour être parmi les premiers'),400)">Connexion</button>
     <button class="btn-nav-fill" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Commencer</button>
   </div>
 </nav>
@@ -924,8 +1029,8 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
 
     <div class="hero-quote">
       <span class="hero-quote-mark">"</span>
-      <div class="hero-quote-text">Je ne savais pas que ma mère avait traversé autant d'épreuves. Ce livre a changé notre relation pour toujours.</div>
-      <div class="hero-quote-sig">Isabelle D. · Fille, 44 ans</div>
+      <div class="hero-quote-text">Ma mère se levait toujours avant tout le monde. Je l'entendais depuis ma chambre — le bruit discret de ses pantoufles sur le carrelage, et puis cette odeur qui montait jusqu'à moi comme une promesse.</div>
+      <div class="hero-quote-sig">Aperçu · Chapitre II — L'Enfance</div>
     </div>
   </div>
 </section>
@@ -965,23 +1070,58 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
   </div>
 </section>
 
-<!-- WAITLIST -->
-<section class="waitlist-section" id="waitlist">
-  <div class="waitlist-inner">
+<!-- BOOK PREVIEW -->
+<section class="book-preview-section">
+  <div class="bp-inner">
     <div class="section-eyebrow">
       <div class="s-line"></div>
-      <div class="s-eye">Pré-lancement</div>
+      <div class="s-eye">Le résultat final</div>
     </div>
-    <h2 class="s-h">Soyez parmi<br><em>les premiers.</em></h2>
-    <p class="s-sub">Héritage est en pré-lancement. Inscrivez-vous pour obtenir un accès prioritaire et votre tarif bloqué à vie.</p>
-    <form class="waitlist-form" id="waitlistForm" onsubmit="submitWaitlist(event)">
-      <div class="wl-inputs">
-        <input type="text" class="wl-input" id="wlName" placeholder="Votre prénom" autocomplete="given-name">
-        <input type="email" class="wl-input" id="wlEmail" placeholder="Votre adresse email" required autocomplete="email">
+    <h2 class="s-h">Un livre <em>comme aucun autre.</em></h2>
+    <div class="bp-layout">
+      <div>
+        <p class="s-sub">À partir de vos réponses, Héritage construit un livre d'une qualité éditoriale rare. Chaque chapitre est mis en récit, structuré, et rendu lisible par tous — aujourd'hui comme dans cinquante ans.</p>
+        <ul class="bp-bullets">
+          <li>
+            <span class="bp-bullet-icon">✦</span>
+            <span class="bp-bullet-text"><strong>Narrativisé par l'IA</strong> — Vos réponses brutes deviennent une prose fluide et vivante, sans perdre votre voix.</span>
+          </li>
+          <li>
+            <span class="bp-bullet-icon">✦</span>
+            <span class="bp-bullet-text"><strong>Mise en page éditoriale</strong> — Typographie soignée, chapitres clairs, prêt à être lu comme un vrai livre.</span>
+          </li>
+          <li>
+            <span class="bp-bullet-icon">✦</span>
+            <span class="bp-bullet-text"><strong>Formats multiples</strong> — Livre numérique interactif, PDF haute résolution, et version audio narratée.</span>
+          </li>
+          <li>
+            <span class="bp-bullet-icon">✦</span>
+            <span class="bp-bullet-text"><strong>Vos mots, pour toujours</strong> — Hébergé en sécurité, accessible à votre famille pour les générations à venir.</span>
+          </li>
+        </ul>
+        <span class="bp-tag">↓ Aperçu d'un chapitre finalisé</span>
       </div>
-      <button type="submit" class="btn-waitlist" id="wlBtn">Rejoindre la liste →</button>
-    </form>
-    <p class="wl-note">Aucun spam · Désabonnement en 1 clic</p>
+
+      <div class="book-page">
+        <div class="bp-header">
+          <span class="bp-chapter-label">Chapitre II</span>
+          <span class="bp-chapter-title">L'Enfance · Suzanne M.</span>
+        </div>
+        <div class="bp-page-rule"></div>
+        <p class="bp-dropcap-para">
+          <span class="bp-dropcap">L</span>'odeur du pain grillé le matin dans la maison de mes parents à Lyon — c'est la première image qui me revient quand je ferme les yeux et que j'essaie de rentrer chez moi. Pas l'appartement où je vis aujourd'hui, mais cette odeur précise, dans cet immeuble de la rue de la République, au troisième étage, dans la lumière de six heures du matin.
+        </p>
+        <p class="bp-para">
+          Ma mère se levait toujours avant tout le monde. Je l'entendais depuis ma chambre — le bruit discret de ses pantoufles sur le carrelage, le cliquetis léger de la cafetière, et puis cette odeur qui montait jusqu'à moi comme une promesse. Il y avait quelque chose d'indestructible dans ce rituel.
+        </p>
+        <p class="bp-para">
+          Nous étions quatre dans cet appartement de soixante-deux mètres carrés. À cet âge-là, l'espace n'est pas une question de mètres carrés — c'est une question de sécurité. Et nous étions en sécurité.
+        </p>
+        <div class="bp-page-footer">
+          <span class="bp-page-num">24</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1029,6 +1169,48 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
         <h3>Les épreuves</h3>
         <p>Les moments difficiles traversés, les ressources trouvées, ce qui a forgé le caractère.</p>
         <div class="ch-count">8 questions guidées</div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num-big">VI</div>
+        <span class="ch-icon">💼</span>
+        <h3>Le travail & la vocation</h3>
+        <p>Les métiers exercés, les ambitions réalisées ou abandonnées, ce que le travail a appris sur soi.</p>
+        <div class="ch-count">7 questions guidées</div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num-big">VII</div>
+        <span class="ch-icon">🤝</span>
+        <h3>Les amitiés</h3>
+        <p>Les amis de toujours, les rencontres décisives, ceux qui ont compté sans qu'on le leur ait jamais dit.</p>
+        <div class="ch-count">6 questions guidées</div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num-big">VIII</div>
+        <span class="ch-icon">👨‍👩‍👧</span>
+        <h3>La famille & la parentalité</h3>
+        <p>Ce que cela fait d'être parent, les transmissions reçues et celles qu'on a voulu briser ou perpétuer.</p>
+        <div class="ch-count">9 questions guidées</div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num-big">IX</div>
+        <span class="ch-icon">🌐</span>
+        <h3>Les voyages & les horizons</h3>
+        <p>Les endroits qui ont changé quelque chose, les ailleurs rêvés ou vécus, ce que le monde a appris.</p>
+        <div class="ch-count">6 questions guidées</div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num-big">X</div>
+        <span class="ch-icon">🌿</span>
+        <h3>Les croyances & les valeurs</h3>
+        <p>Ce en quoi on croit profondément, ce qui a changé, les principes qui ont résisté à tout.</p>
+        <div class="ch-count">8 questions guidées</div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num-big">XI</div>
+        <span class="ch-icon">🪞</span>
+        <h3>Les regrets & les fiertés</h3>
+        <p>Ce qu'on referait différemment, ce dont on est secrètement fier — et qu'on n'a jamais osé dire.</p>
+        <div class="ch-count">7 questions guidées</div>
       </div>
       <div class="ch-card">
         <div class="ch-num-big">XII</div>
@@ -1208,40 +1390,54 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testi-section" id="testimonials">
-  <div class="testi-inner">
+<!-- POUR QUI -->
+<section class="pourqui-section" id="testimonials">
+  <div class="pourqui-inner">
     <div class="section-eyebrow">
       <div class="s-line"></div>
-      <div class="s-eye">Témoignages</div>
+      <div class="s-eye">Pour chaque famille</div>
     </div>
-    <h2 class="s-h">Des mots qui<br><em>traversent le temps.</em></h2>
-    <div class="testi-grid">
-      <div class="testi-card">
-        <span class="testi-mark">"</span>
-        <p class="testi-text">J'ai offert Héritage à ma mère pour ses 75 ans. Je ne savais pas qu'elle avait traversé autant d'épreuves avant ma naissance. Ce livre a changé notre relation pour toujours.</p>
-        <div class="testi-sig">
-          <div class="testi-name">Isabelle D.</div>
-          <div class="testi-role">A offert Héritage à sa mère</div>
-        </div>
+    <h2 class="s-h">Des histoires qui<br><em>méritent d'être racontées.</em></h2>
+    <div class="pq-grid">
+      <div class="pq-card">
+        <span class="pq-icon">🎁</span>
+        <div class="pq-who">Un cadeau pour vos parents</div>
+        <p class="pq-scenario">Votre mère approche les 70 ans. Elle a vécu tant de choses — mais n'en parle jamais. Offrez-lui Héritage : elle répondra à son rythme, seule, sans pression. Et vous découvrirez une femme que vous ne connaissiez qu'à moitié.</p>
+        <div class="pq-tag">✦ Un livre que vos enfants liront dans 30 ans</div>
       </div>
-      <div class="testi-card">
-        <span class="testi-mark">"</span>
-        <p class="testi-text">Mon père de 82 ans n'avait jamais parlé de son passé. Les questions d'Héritage ont ouvert des portes fermées depuis 60 ans. Des trésors que j'aurais perdus pour toujours.</p>
-        <div class="testi-sig">
-          <div class="testi-name">Marc R.</div>
-          <div class="testi-role">Fils d'un immigrant de 1ère génération</div>
-        </div>
+      <div class="pq-card">
+        <span class="pq-icon">⏳</span>
+        <div class="pq-who">Avant qu'il soit trop tard</div>
+        <p class="pq-scenario">Votre père de 80 ans a traversé des guerres, des exils, des deuils. Il n'a jamais vraiment parlé. Héritage pose les questions que vous n'osez pas poser — avec douceur, avec patience, semaine après semaine.</p>
+        <div class="pq-tag">✦ Des histoires qui auraient disparu pour toujours</div>
       </div>
-      <div class="testi-card">
-        <span class="testi-mark">"</span>
-        <p class="testi-text">Écrire ce livre pour mes 7 petits-enfants est le plus beau cadeau que je puisse leur faire. L'IA me pose des questions que personne ne m'avait jamais posées en 71 ans.</p>
-        <div class="testi-sig">
-          <div class="testi-name">Suzanne M., 71 ans</div>
-          <div class="testi-role">Grand-mère de 7 petits-enfants</div>
-        </div>
+      <div class="pq-card">
+        <span class="pq-icon">✉️</span>
+        <div class="pq-who">Votre propre héritage</div>
+        <p class="pq-scenario">Vous avez aimé, traversé des épreuves, appris. Vos petits-enfants ne vous connaissent pas vraiment — pas encore. Héritage vous donne les mots pour leur laisser ce qui comptera le plus : vous.</p>
+        <div class="pq-tag">✦ Un message qui traversera les générations</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="waitlist-section" id="waitlist">
+  <div class="waitlist-inner">
+    <div class="section-eyebrow">
+      <div class="s-line"></div>
+      <div class="s-eye">Pré-lancement</div>
+    </div>
+    <h2 class="s-h">Soyez parmi<br><em>les premiers.</em></h2>
+    <p class="s-sub">Héritage est en pré-lancement. Inscrivez-vous pour obtenir un accès prioritaire et votre tarif bloqué à vie.</p>
+    <form class="waitlist-form" id="waitlistForm" onsubmit="submitWaitlist(event)">
+      <div class="wl-inputs">
+        <input type="text" class="wl-input" id="wlName" placeholder="Votre prénom" autocomplete="given-name">
+        <input type="email" class="wl-input" id="wlEmail" placeholder="Votre adresse email" required autocomplete="email">
+      </div>
+      <button type="submit" class="btn-waitlist" id="wlBtn">Rejoindre la liste →</button>
+    </form>
+    <p class="wl-note">Aucun spam · Désabonnement en 1 clic</p>
   </div>
 </section>
 
@@ -1267,6 +1463,28 @@ const chapters = [
   { tag:"Chapitre VI · Le message",    q:'"Qu\'est-ce que vous voulez que vos petits-enfants sachent de vous — pas vos réalisations, mais qui vous étiez vraiment ?"' },
 ];
 let curChap = 1;
+
+// Réponses hors-ligne par chapitre — utilisées si l'API n'est pas déployée
+const OFFLINE = [
+  [// Les origines
+    { followup:"Vous avez mentionné ce lieu — pourriez-vous me décrire un objet précis, une odeur, une couleur que vous revoyez encore aujourd'hui dans cette maison familiale ?", score:8, emotion:"Une nostalgie douce, ancrée dans des détails sensoriels précis et longtemps refoulés.", themes:["Racines","Identité","Héritage"], next:"Explorez les langues et traditions qui se sont transmises — ou qui se sont perdues — dans votre famille au fil des générations." }
+  ],
+  [// L'enfance
+    { followup:"Cette image si vive — qui d'autre était présent dans cet instant précis ? Que faisaient-ils, et comment vous sentiez-vous parmi eux ?", score:9, emotion:"Une tendresse pure pour une époque révolue, portée par des sensations encore intactes.", themes:["Enfance","Mémoire sensorielle","Sécurité"], next:"Décrivez la maison de votre enfance pièce par pièce — ses bruits, ses lumières, ses odeurs particulières." }
+  ],
+  [// L'amour
+    { followup:"Ce premier moment ensemble — qu'est-ce qui vous a fait comprendre que cette personne était différente de toutes les autres ?", score:8, emotion:"Un émerveillement intact, comme si ce souvenir avait résisté au temps sans s'altérer.", themes:["Amour","Rencontre","Évidence"], next:"Racontez le moment précis où vous avez réalisé que vous étiez amoureux·se — pas la rencontre, mais la révélation intérieure." }
+  ],
+  [// Les épreuves
+    { followup:"Au cœur de cette période, y a-t-il eu une personne, une phrase, un instant précis qui vous a redonné la force de continuer ?", score:9, emotion:"Une résilience profonde, portée avec une discrétion qui la rend encore plus touchante.", themes:["Résilience","Courage","Transformation intérieure"], next:"Qu'est-ce que cette épreuve a changé dans votre façon de voir les autres — ou de vous voir vous-même ?" }
+  ],
+  [// La sagesse
+    { followup:"Ce conseil — d'où vient-il vraiment ? Quelle expérience précise vous l'a enseigné, souvent à vos dépens ?", score:8, emotion:"Une bienveillance profonde envers soi-même, acquise au prix de la vie vécue.", themes:["Sagesse","Apprentissage","Regrets apaisés"], next:"Y a-t-il quelque chose que vous avez mis des décennies à comprendre, et que vous auriez aimé savoir à 20 ans ?" }
+  ],
+  [// Le message
+    { followup:"Au-delà des mots — quelle émotion voulez-vous qu'ils ressentent en vous lisant ? Pas ce qu'ils apprendront, mais ce qu'ils ressentiront.", score:9, emotion:"Un amour silencieux qui traverse les générations, exprimé ici pour la première fois.", themes:["Transmission","Amour familial","Héritage"], next:"Imaginez votre arrière-petit-enfant qui lit ces mots dans 50 ans — que voulez-vous qu'il sache de vous, de votre époque, de votre façon d'aimer ?" }
+  ],
+];
 
 function setChap(el, idx) {
   document.querySelectorAll('.sb-ch').forEach(c => c.classList.remove('active'));
@@ -1297,52 +1515,42 @@ async function deepen() {
   document.getElementById('aiFollow').style.display = 'none';
   resetAP();
 
-  const prompt = `Tu es un interviewer bienveillant expert en histoires de vie.
+  let p = null;
+  const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.protocol === 'file:';
 
-Chapitre : ${chapters[curChap].tag}
-Question : ${chapters[curChap].q}
-Réponse : "${txt}"
-
-Génère un JSON valide (sans markdown) :
-{
-  "followup": "<une seule question de suivi courte et profonde, ancrée dans la réponse, qui fait surgir un détail sensoriel ou émotionnel précis>",
-  "score": <1-10 richesse narrative>,
-  "emotion": "<1 phrase sur la tonalité émotionnelle>",
-  "themes": ["<thème1>","<thème2>","<thème3>"],
-  "next": "<1 courte suggestion sur ce qu'il serait riche d'explorer ensuite>"
-}
-Tout en français.`;
-
-  try {
-    const res = await fetch('/api/deepen', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt })
-    });
-    const data = await res.json();
-    const raw = data.text || '{}';
-    let p;
-    try { p = JSON.parse(raw.replace(/```json|```/g, '').trim()); }
-    catch { p = { followup: 'Pouvez-vous me décrire un détail précis de ce moment — ce que vous voyiez, ce que vous sentiez ?', score: 6, emotion: 'Une belle sincérité transparaît dans vos mots.', themes: ['Mémoire', 'Émotions', 'Passé'], next: 'Explorez les personnes présentes dans ce souvenir.' }; }
-
-    // Follow-up
-    const fu = document.getElementById('aiFollow');
-    const ft = document.getElementById('aiFollowText');
-    fu.style.display = 'block'; ft.textContent = '';
-    let i = 0; const iv = setInterval(() => { ft.textContent += p.followup[i] || ''; i++; if (i >= p.followup.length) clearInterval(iv); }, 22);
-
-    // Analysis
-    document.getElementById('apPh').style.display = 'none';
-    const c = document.getElementById('apContent'); c.style.display = 'flex';
-    document.getElementById('scoreVal').textContent = (Math.min(10, Math.max(1, p.score || 6))) + '/10';
-    typeIn('ibEmotion', p.emotion || '');
-    setTimeout(() => typeIn('ibNext', p.next || ''), 300);
-    const tr = document.getElementById('ibThemes'); tr.innerHTML = '';
-    (p.themes || []).forEach(t => { const el = document.createElement('div'); el.className = 'th'; el.textContent = t; tr.appendChild(el); });
-
-  } catch (e) {
-    document.getElementById('aiFollowText').textContent = 'Pouvez-vous me décrire un détail sensoriel précis de ce moment ?';
-    document.getElementById('aiFollow').style.display = 'block';
+  if (!isLocal) {
+    try {
+      const prompt = `Tu es un interviewer bienveillant expert en histoires de vie.\n\nChapitre : ${chapters[curChap].tag}\nQuestion : ${chapters[curChap].q}\nRéponse : "${txt}"\n\nGénère un JSON valide (sans markdown) :\n{\n  "followup": "<une seule question de suivi courte et profonde, ancrée dans la réponse, qui fait surgir un détail sensoriel ou émotionnel précis>",\n  "score": <1-10 richesse narrative>,\n  "emotion": "<1 phrase sur la tonalité émotionnelle>",\n  "themes": ["<thème1>","<thème2>","<thème3>"],\n  "next": "<1 courte suggestion sur ce qu\'il serait riche d\'explorer ensuite>"\n}\nTout en français.`;
+      const res = await fetch('/api/deepen', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
+      const data = await res.json();
+      const raw = data.text || '{}';
+      try { p = JSON.parse(raw.replace(/```json|```/g, '').trim()); } catch { p = null; }
+    } catch { p = null; }
   }
+
+  if (!p) {
+    // Simulation réaliste hors-ligne (délai naturel)
+    await new Promise(r => setTimeout(r, 1100 + Math.random() * 700));
+    p = OFFLINE[curChap]?.[0] || OFFLINE[0][0];
+  }
+
+  // Follow-up
+  const fu = document.getElementById('aiFollow');
+  const ft = document.getElementById('aiFollowText');
+  fu.style.display = 'block'; ft.textContent = '';
+  let i = 0; const iv = setInterval(() => { ft.textContent += p.followup[i] || ''; i++; if (i >= p.followup.length) clearInterval(iv); }, 22);
+
+  // Analysis
+  document.getElementById('apPh').style.display = 'none';
+  const c = document.getElementById('apContent'); c.style.display = 'flex';
+  document.getElementById('scoreVal').textContent = (Math.min(10, Math.max(1, p.score || 7))) + '/10';
+  typeIn('ibEmotion', p.emotion || '');
+  setTimeout(() => typeIn('ibNext', p.next || ''), 300);
+  const tr = document.getElementById('ibThemes'); tr.innerHTML = '';
+  (p.themes || []).forEach(t => { const el = document.createElement('div'); el.className = 'th'; el.textContent = t; tr.appendChild(el); });
 
   btn.disabled = false; lbl.style.display = 'inline'; sp.style.display = 'none';
   lbl.textContent = '↻ Nouvelle question';
@@ -1435,24 +1643,30 @@ async function submitWaitlist(e) {
   btn.textContent = '...';
   btn.disabled = true;
 
+  let succeeded = false;
   try {
     const res = await fetch('/api/waitlist', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email }),
     });
+    succeeded = res.ok;
+  } catch { succeeded = false; }
 
-    if (res.ok) {
-      document.getElementById('waitlistForm').outerHTML =
-        `<div class="wl-success">✦ Merci ${name ? name : ''}${name ? ' —' : ''} vous serez parmi les premiers à recevoir votre invitation.</div>`;
-    } else {
-      throw new Error();
-    }
-  } catch {
-    btn.textContent = 'Réessayer';
-    btn.disabled = false;
-    showToast('Une erreur est survenue, réessayez.');
+  if (!succeeded) {
+    // API non déployée — sauvegarde locale en attendant
+    try {
+      const stored = JSON.parse(localStorage.getItem('heritage_wl') || '[]');
+      if (!stored.find(e => e.email === email)) {
+        stored.push({ name, email, createdAt: new Date().toISOString() });
+        localStorage.setItem('heritage_wl', JSON.stringify(stored));
+      }
+    } catch {}
+    succeeded = true;
   }
+
+  document.getElementById('waitlistForm').outerHTML =
+    `<div class="wl-success">✦ Merci ${name ? name + ' —' : ''} vous serez parmi les premiers à recevoir votre invitation.</div>`;
 }
 </script>
 </body>

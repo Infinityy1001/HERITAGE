@@ -1,4 +1,6 @@
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
+
+const redis = Redis.fromEnv();
 
 export default async function handler(req, res) {
   if (req.method === 'OPTIONS') {
@@ -20,13 +22,13 @@ export default async function handler(req, res) {
   };
 
   // Store in sorted set (score = timestamp for ordering), keyed by email to avoid duplicates
-  await kv.zadd('waitlist', {
+  await redis.zadd('waitlist', {
     score: Date.now(),
     member: JSON.stringify(entry),
   });
 
   // Also store email as a simple key to detect duplicates on next visit
-  await kv.set(`wl:${entry.email}`, entry.createdAt);
+  await redis.set(`wl:${entry.email}`, entry.createdAt);
 
   res.status(200).json({ ok: true });
 }

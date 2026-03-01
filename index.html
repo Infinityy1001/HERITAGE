@@ -945,50 +945,39 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
 .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
 /* ─── MOBILE MENU ─── */
-.mobile-menu { display: none; }
+.mobile-menu {
+  display: none;
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1000; background: #f9f5ee;
+  flex-direction: column;
+  padding: 28px 28px 48px; box-sizing: border-box;
+}
 .mobile-menu.open { display: flex; }
-.mm-overlay {
-  position: fixed; inset: 0; z-index: 998;
-  background: rgba(26,21,16,0.55);
-}
-.mm-panel {
-  position: fixed; top: 0; right: 0; bottom: 0; z-index: 999;
-  width: 280px; background: var(--cream);
-  display: flex; flex-direction: column;
-  padding: 32px 28px max(env(safe-area-inset-bottom,0px),32px);
-  animation: mmSlide 0.26s cubic-bezier(0.4,0,0.2,1);
-}
-@keyframes mmSlide { from { transform: translateX(100%); } to { transform: translateX(0); } }
-.mm-top {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 40px;
-}
-.mm-logo {
-  font-family: 'Cormorant Garamond', serif; font-size: 16px;
-  font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: var(--ink);
-}
 .mm-close {
-  background: none; border: none; cursor: pointer; font-size: 20px;
-  color: var(--muted); padding: 4px 8px; transition: color 0.2s; line-height: 1;
+  align-self: flex-end;
+  background: none; border: none; cursor: pointer;
+  font-size: 32px; line-height: 1; color: #1a1510;
+  font-family: Arial, sans-serif; font-weight: 300; padding: 4px 0;
 }
-.mm-close:hover { color: var(--ink); }
-.mm-nav { display: flex; flex-direction: column; }
+.mm-nav {
+  display: flex; flex-direction: column; width: 100%;
+  margin-top: 56px;
+}
 .mm-nav a {
-  font-family: 'Cormorant Garamond', serif; font-size: 26px;
-  font-weight: 300; font-style: italic; color: var(--ink);
-  text-decoration: none; cursor: pointer;
-  padding: 14px 0; border-bottom: 1px solid var(--border);
-  transition: color 0.15s;
+  font-family: 'Cormorant Garamond', serif; font-size: 22px;
+  font-weight: 400; font-style: italic; color: #1a1510;
+  text-align: right; text-decoration: none; cursor: pointer;
+  padding: 14px 0; border-bottom: 1px solid #e0d8cc;
+  display: block; width: 100%;
 }
-.mm-nav a:hover, .mm-nav a:active { color: var(--gold); }
+.mm-nav a:active { color: #c9a84c; }
 .mm-cta {
-  margin-top: auto; padding-top: 32px;
+  margin-top: auto; width: 100%; display: block; text-align: center;
   font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
-  text-transform: uppercase; color: var(--cream); background: var(--ink);
-  border: none; cursor: pointer; padding: 15px 20px;
-  font-family: 'Jost', sans-serif; transition: background 0.2s;
+  text-transform: uppercase; color: #f9f5ee; background: #1a1510;
+  border: none; cursor: pointer; padding: 18px;
+  font-family: 'Jost', sans-serif;
 }
-.mm-cta:hover { background: var(--gold); }
 
 /* ─── CHIPS CHAPITRES MOBILE ─── */
 .mobile-chaps {
@@ -1170,20 +1159,14 @@ footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
 
 <!-- MENU MOBILE -->
 <div class="mobile-menu" id="mobileMenu">
-  <div class="mm-overlay" onclick="toggleMenu()"></div>
-  <div class="mm-panel">
-    <div class="mm-top">
-      <span class="mm-logo">Héritage</span>
-      <button class="mm-close" onclick="toggleMenu()">✕</button>
-    </div>
-    <nav class="mm-nav">
-      <a onclick="navTo('how')" data-i18n="nav_process">Le processus</a>
-      <a onclick="navTo('chapters')" data-i18n="nav_chapters">Les chapitres</a>
-      <a onclick="navTo('demo')" data-i18n="mm_demo">Démo interactive</a>
-      <a onclick="navTo('pricing')" data-i18n="nav_pricing">Tarifs</a>
-    </nav>
-    <button class="mm-cta" onclick="navTo('waitlist')" data-i18n="mm_join">Rejoindre la liste →</button>
+  <button class="mm-close" onclick="toggleMenu()">✕</button>
+  <div class="mm-nav">
+    <a onclick="navTo('how')" data-i18n="nav_process">Le processus</a>
+    <a onclick="navTo('chapters')" data-i18n="nav_chapters">Les chapitres</a>
+    <a onclick="navTo('demo')" data-i18n="mm_demo">Démo interactive</a>
+    <a onclick="navTo('pricing')" data-i18n="nav_pricing">Tarifs</a>
   </div>
+  <button class="mm-cta" onclick="navTo('waitlist')" data-i18n="mm_join">Rejoindre la liste →</button>
 </div>
 
 <!-- HERO -->

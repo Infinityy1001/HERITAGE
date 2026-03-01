@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Héritage — Préservez la sagesse de ceux que vous aimez</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f9f5ee;
+  --cream2: #f3ede2;
+  --cream3: #ede5d8;
+  --white: #fdfaf5;
+  --ink: #1a1510;
+  --ink2: #2e2820;
+  --muted: #9c8e7e;
+  --border: #e0d8cc;
+  --border2: #d4cbbe;
+  --gold: #b8922a;
+  --gold2: #d4ae58;
+  --gold3: #e8c97a;
+  --gold-pale: rgba(184,146,42,0.12);
+  --warm: #8b4a2a;
+  --sage: #4a5e48;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ─── CURSOR ─── */
+*, a, button { cursor: default; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top:40px; left:0; right:0; z-index:100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 56px; height: 72px;
+  background: rgba(249,245,238,0.92);
+  backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  display: flex; align-items: center; gap: 14px;
+  text-decoration: none;
+}
+.logo-emblem {
+  width: 34px; height: 34px;
+  border: 1px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.logo-emblem::before {
+  content: '✦';
+  font-size: 13px; color: var(--gold);
+}
+.logo-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 400; letter-spacing: 5px;
+  text-transform: uppercase; color: var(--ink);
+}
+
+.nav-links { display: flex; gap: 38px; }
+.nav-links a {
+  font-size: 12px; font-weight: 400; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--muted);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+.nav-actions { display: flex; gap: 14px; align-items: center; }
+.btn-nav-ghost {
+  font-size: 12px; font-weight: 400; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--muted);
+  background: none; border: none; cursor: pointer;
+  transition: color 0.2s; font-family: 'Jost', sans-serif;
+  padding: 8px 4px;
+}
+.btn-nav-ghost:hover { color: var(--ink); }
+.btn-nav-fill {
+  font-size: 11px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--cream);
+  background: var(--ink); border: none; cursor: pointer;
+  padding: 11px 26px; transition: all 0.25s;
+  font-family: 'Jost', sans-serif;
+}
+.btn-nav-fill:hover { background: var(--gold); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  position: relative; overflow: hidden;
+  padding-top: 112px;
+}
+
+.hero-left {
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 80px 64px 80px 56px;
+  position: relative; z-index: 2;
+}
+
+/* Decorative vertical line */
+.hero-left::after {
+  content: '';
+  position: absolute; top: 15%; right: 0; bottom: 15%;
+  width: 1px; background: var(--border2);
+}
+
+.hero-overline {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 40px;
+  animation: fadeUp 0.8s ease both;
+}
+.hero-overline-line { width: 32px; height: 1px; background: var(--gold); }
+.hero-overline-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; font-weight: 400; font-style: italic;
+  letter-spacing: 2px; color: var(--gold);
+}
+
+h1 {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(52px, 5.5vw, 80px);
+  font-weight: 300; line-height: 1.07;
+  letter-spacing: -1px; color: var(--ink);
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+h1 em {
+  font-style: italic; font-weight: 400;
+  display: block; color: var(--gold);
+}
+
+.hero-rule {
+  width: 48px; height: 1px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  margin: 32px 0;
+  animation: fadeUp 0.8s 0.15s ease both;
+}
+
+.hero-p {
+  font-size: 17px; color: var(--muted); line-height: 1.85;
+  max-width: 440px; font-weight: 300;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero-ctas {
+  display: flex; gap: 16px; align-items: center;
+  margin-top: 44px; flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.28s ease both;
+}
+.btn-primary {
+  font-size: 11px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--cream);
+  background: var(--ink); border: none; cursor: pointer;
+  padding: 16px 36px; transition: all 0.25s;
+  font-family: 'Jost', sans-serif;
+}
+.btn-primary:hover { background: var(--gold); transform: translateY(-1px); }
+.btn-secondary {
+  font-size: 11px; font-weight: 400; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--border2); cursor: pointer;
+  padding: 16px 28px; transition: all 0.25s;
+  font-family: 'Jost', sans-serif;
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+.hero-nums {
+  display: flex; gap: 48px; margin-top: 60px;
+  padding-top: 40px; border-top: 1px solid var(--border);
+  animation: fadeUp 0.8s 0.36s ease both;
+}
+.hero-num-item .n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px; font-weight: 300; color: var(--ink);
+  display: block; line-height: 1;
+}
+.hero-num-item .l {
+  font-size: 11px; font-weight: 400; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--muted); margin-top: 6px;
+}
+
+/* Hero right — book visual */
+.hero-right {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--cream2);
+  position: relative; overflow: hidden;
+  animation: fadeIn 1s 0.4s ease both;
+}
+
+.hero-right::before {
+  content: 'HÉRITAGE';
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 160px; font-weight: 300; letter-spacing: 20px;
+  color: rgba(26,21,16,0.03); white-space: nowrap;
+  pointer-events: none;
+}
+
+.book-scene {
+  position: relative; width: 320px; height: 420px;
+}
+
+/* Base book (back) */
+.bk {
+  position: absolute;
+  border-radius: 1px 4px 4px 1px;
+  transition: transform 0.4s ease;
+}
+.bk-3 {
+  width: 200px; height: 280px;
+  background: linear-gradient(170deg, #d4af5a 0%, #b8922a 100%);
+  top: 90px; left: 90px;
+  transform: rotate(5deg);
+  box-shadow: 6px 8px 32px rgba(26,21,16,0.2);
+}
+.bk-2 {
+  width: 195px; height: 272px;
+  background: linear-gradient(170deg, #3d2a1a 0%, #1a1208 100%);
+  top: 80px; left: 72px;
+  transform: rotate(-2deg);
+  box-shadow: 4px 6px 24px rgba(26,21,16,0.25);
+}
+.bk-1 {
+  width: 200px; height: 278px;
+  background: linear-gradient(170deg, #f9f5ee 0%, #e8deca 100%);
+  top: 72px; left: 62px;
+  transform: rotate(-6deg);
+  box-shadow: -2px 8px 40px rgba(26,21,16,0.18), inset -1px 0 0 rgba(26,21,16,0.08);
+  border: 1px solid rgba(184,146,42,0.3);
+}
+
+.bk-spine {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 12px;
+  background: rgba(26,21,16,0.06);
+  border-right: 1px solid rgba(26,21,16,0.08);
+}
+.bk-content { padding: 28px 22px 22px 28px; }
+.bk-ornament {
+  font-size: 20px; color: var(--gold); margin-bottom: 16px; display: block;
+}
+.bk-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; font-weight: 400; color: var(--ink);
+  line-height: 1.4; letter-spacing: 0.5px;
+}
+.bk-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px; font-style: italic; color: var(--muted);
+  margin-top: 6px; letter-spacing: 1px;
+}
+.bk-divider {
+  width: 32px; height: 1px;
+  background: var(--gold); margin: 18px 0;
+  opacity: 0.6;
+}
+.bk-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; color: var(--muted); letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.bk-bottom-ornament {
+  position: absolute; bottom: 18px; left: 0; right: 0;
+  text-align: center; font-size: 11px; color: var(--gold);
+  opacity: 0.5; letter-spacing: 4px;
+}
+
+.book-scene:hover .bk-1 { transform: rotate(-8deg) translateX(-6px); }
+.book-scene:hover .bk-3 { transform: rotate(7deg) translateX(6px); }
+
+/* Floating quote */
+.hero-quote {
+  position: absolute; bottom: 60px; left: 40px; right: 40px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 22px 26px;
+  box-shadow: 0 8px 40px rgba(26,21,16,0.08);
+  animation: fadeUp 0.8s 0.6s ease both;
+}
+.hero-quote-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px; color: var(--gold); line-height: 0.6;
+  opacity: 0.4; display: block; margin-bottom: 8px;
+}
+.hero-quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; font-style: italic; color: var(--ink);
+  line-height: 1.65;
+}
+.hero-quote-sig {
+  font-size: 11px; color: var(--muted); letter-spacing: 2px;
+  text-transform: uppercase; margin-top: 12px;
+}
+
+/* ─── SECTION SHARED ─── */
+.section-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 20px;
+}
+.s-line { width: 28px; height: 1px; background: var(--gold); }
+.s-eye {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; font-style: italic; letter-spacing: 1px; color: var(--gold);
+}
+.s-h {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(38px,4.5vw,62px); font-weight: 300;
+  line-height: 1.1; letter-spacing: -1px; color: var(--ink);
+  margin-bottom: 10px;
+}
+.s-h em { font-style: italic; font-weight: 400; color: var(--gold); }
+.s-sub {
+  font-size: 16px; color: var(--muted); line-height: 1.8;
+  font-weight: 300; max-width: 480px;
+}
+
+/* ─── HOW IT WORKS ─── */
+.hiw {
+  padding: 120px 56px;
+  border-top: 1px solid var(--border);
+  max-width: 1200px; margin: 0 auto;
+}
+.steps {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 0; margin-top: 72px;
+  border-top: 1px solid var(--border);
+}
+.step {
+  padding: 48px 36px 0 0;
+  position: relative;
+}
+.step::before {
+  content: '';
+  position: absolute; top: -1px; left: 0;
+  width: 32px; height: 2px; background: var(--gold);
+}
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 56px; font-weight: 300; color: var(--border2);
+  line-height: 1; margin-bottom: 20px;
+}
+.step-icon { font-size: 26px; margin-bottom: 18px; display: block; }
+.step h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px; font-weight: 400; color: var(--ink);
+  margin-bottom: 12px; line-height: 1.3;
+}
+.step p { font-size: 14px; color: var(--muted); line-height: 1.8; font-weight: 300; }
+
+/* ─── CHAPTERS ─── */
+.chapters-section {
+  background: var(--ink); padding: 120px 56px;
+}
+.chapters-inner { max-width: 1100px; margin: 0 auto; }
+.chapters-section .s-eye { color: var(--gold2); }
+.chapters-section .s-line { background: var(--gold2); }
+.chapters-section .s-h { color: var(--cream); }
+.chapters-section .s-h em { color: var(--gold2); }
+.chapters-section .s-sub { color: rgba(243,237,226,0.4); }
+
+.ch-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; margin-top: 64px;
+  background: rgba(255,255,255,0.07);
+}
+.ch-card {
+  background: var(--ink); padding: 40px 36px;
+  transition: background 0.2s; cursor: default;
+  position: relative; overflow: hidden;
+}
+.ch-card:hover { background: rgba(255,255,255,0.04); }
+.ch-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(184,146,42,0.3), transparent);
+  opacity: 0; transition: opacity 0.2s;
+}
+.ch-card:hover::after { opacity: 1; }
+.ch-num-big {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px; font-weight: 300; color: rgba(255,255,255,0.06);
+  line-height: 1; position: absolute; top: 20px; right: 24px;
+}
+.ch-icon { font-size: 26px; margin-bottom: 16px; display: block; }
+.ch-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 400; color: var(--cream); margin-bottom: 10px;
+}
+.ch-card p { font-size: 13px; color: rgba(243,237,226,0.35); line-height: 1.75; font-weight: 300; }
+.ch-count {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold2); margin-top: 18px; font-weight: 400;
+}
+
+/* ─── DEMO ─── */
+.demo-section {
+  padding: 120px 56px;
+  background: var(--cream2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.demo-inner { max-width: 1100px; margin: 0 auto; }
+.demo-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 52px; flex-wrap: wrap; gap: 24px; }
+
+/* App shell */
+.shell {
+  background: var(--white);
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 80px rgba(26,21,16,0.1), 0 4px 16px rgba(26,21,16,0.04);
+}
+.shell-bar {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  padding: 13px 24px;
+  display: flex; align-items: center; gap: 8px;
+}
+.dot { width: 11px; height: 11px; border-radius: 50%; }
+.dr{background:#ff5f57} .dy{background:#febc2e} .dg{background:#28c840}
+.shell-title {
+  margin: 0 auto; font-size: 12px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
+  font-family: 'Jost', sans-serif;
+}
+
+.app-layout {
+  display: grid; grid-template-columns: 240px 1fr 300px;
+  min-height: 560px;
+}
+
+/* Sidebar */
+.sb {
+  border-right: 1px solid var(--border);
+  padding: 28px 0;
+  background: var(--cream);
+}
+.sb-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--muted);
+  padding: 0 20px 16px; font-family: 'Jost', sans-serif;
+}
+.sb-ch {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 20px; cursor: pointer; transition: all 0.15s;
+  border-left: 2px solid transparent;
+}
+.sb-ch:hover { background: var(--cream2); }
+.sb-ch.active {
+  background: var(--white);
+  border-left-color: var(--gold);
+}
+.sb-ch-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 300; color: var(--border2);
+  width: 24px; flex-shrink: 0; transition: color 0.15s;
+}
+.sb-ch.active .sb-ch-num { color: var(--gold); }
+.sb-ch-name { font-size: 13px; font-weight: 400; color: var(--muted); transition: color 0.15s; }
+.sb-ch.active .sb-ch-name { color: var(--ink); }
+.sb-ch-tick { margin-left: auto; font-size: 11px; color: var(--sage); }
+
+/* Editor */
+.ed {
+  padding: 36px 40px;
+  display: flex; flex-direction: column; gap: 22px;
+  border-right: 1px solid var(--border);
+}
+.ed-top { display: flex; align-items: center; justify-content: space-between; }
+.ed-chapter-tag {
+  font-size: 11px; font-weight: 400; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  font-family: 'Jost', sans-serif;
+  display: flex; align-items: center; gap: 8px;
+}
+.ed-chapter-tag::before { content: '✦'; font-size: 9px; }
+.ed-wc {
+  font-size: 11px; color: var(--muted); letter-spacing: 1px;
+  font-family: 'Jost', sans-serif;
+}
+
+.q-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  padding: 24px 26px;
+}
+.q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.q-avatar {
+  width: 28px; height: 28px;
+  border: 1px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: var(--gold); flex-shrink: 0;
+}
+.q-from {
+  font-size: 11px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  font-family: 'Jost', sans-serif;
+}
+.q-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 400; font-style: italic;
+  color: var(--ink); line-height: 1.55;
+}
+
+.ans-ta {
+  width: 100%; background: var(--cream);
+  border: 1px solid var(--border); padding: 20px 22px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; color: var(--ink); resize: none;
+  outline: none; min-height: 160px; line-height: 1.85;
+  font-weight: 400; transition: border-color 0.2s;
+}
+.ans-ta::placeholder {
+  color: var(--muted); font-style: italic; font-size: 15px;
+}
+.ans-ta:focus { border-color: var(--gold); background: var(--white); }
+
+.ai-follow {
+  background: rgba(184,146,42,0.06);
+  border: 1px solid rgba(184,146,42,0.2);
+  padding: 18px 20px; display: none;
+}
+.ai-follow-head {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+}
+.ai-follow-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold); animation: glow 2s ease-in-out infinite;
+}
+@keyframes glow { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+.ai-follow-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  font-family: 'Jost', sans-serif;
+}
+.ai-follow-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; font-style: italic; color: var(--ink); line-height: 1.7;
+}
+
+.ed-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: auto;
+}
+.btn-deepen {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--cream);
+  background: var(--ink); border: none; cursor: pointer;
+  padding: 12px 24px; transition: all 0.2s;
+  font-family: 'Jost', sans-serif;
+}
+.btn-deepen:hover:not(:disabled) { background: var(--gold); }
+.btn-deepen:disabled { opacity: 0.4; cursor: not-allowed; }
+.spin-sm {
+  width: 13px; height: 13px;
+  border: 1.5px solid rgba(249,245,238,0.3);
+  border-top-color: var(--cream);
+  border-radius: 50%; animation: spin 0.7s linear infinite; display: none;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Analysis */
+.ap {
+  padding: 28px 24px;
+  background: var(--cream);
+  display: flex; flex-direction: column; gap: 14px;
+  overflow-y: auto;
+}
+.ap-title {
+  font-size: 10px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--muted);
+  font-family: 'Jost', sans-serif;
+}
+
+.ap-ph {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; gap: 12px; padding: 20px;
+}
+.ap-ph-icon { font-size: 28px; opacity: 0.2; }
+.ap-ph-text { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+.score-block {
+  border: 1px solid var(--border2);
+  background: var(--white); padding: 22px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.score-block::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, var(--gold), var(--gold2), var(--gold));
+}
+.score-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px; font-weight: 300; color: var(--ink); line-height: 1;
+}
+.score-label {
+  font-size: 10px; font-weight: 400; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--muted); margin-top: 4px;
+}
+
+.insight-block {
+  background: var(--white); border: 1px solid var(--border);
+  padding: 16px 18px;
+}
+.ib-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 8px; font-family: 'Jost', sans-serif;
+}
+.ib-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px; font-style: italic; color: var(--ink); line-height: 1.7;
+}
+.themes-wrap { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.th {
+  font-size: 11px; font-weight: 400; letter-spacing: 1px;
+  color: var(--muted); border: 1px solid var(--border);
+  padding: 3px 10px; background: var(--cream);
+  font-family: 'Jost', sans-serif;
+}
+
+/* ─── PRICING ─── */
+.pricing-section { padding: 120px 56px; max-width: 1100px; margin: 0 auto; }
+.plans {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--border); margin-top: 64px;
+}
+.plan { padding: 52px 48px; position: relative; }
+.plan:first-child { border-right: 1px solid var(--border); }
+.plan.featured { background: var(--ink); }
+
+.plan-badge {
+  position: absolute; top: 28px; right: 28px;
+  font-size: 10px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  border: 1px solid rgba(184,146,42,0.4);
+  padding: 4px 12px; font-family: 'Jost', sans-serif;
+}
+
+.plan-tier {
+  font-size: 11px; font-weight: 400; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 24px;
+  font-family: 'Jost', sans-serif;
+}
+.plan.featured .plan-tier { color: rgba(243,237,226,0.35); }
+
+.plan-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px; font-weight: 300; line-height: 1; color: var(--ink);
+}
+.plan.featured .plan-price { color: var(--cream); }
+.plan-price sup { font-size: 28px; vertical-align: top; margin-top: 14px; }
+.plan-period { font-size: 13px; color: var(--muted); margin: 8px 0 40px; letter-spacing: 1px; }
+.plan.featured .plan-period { color: rgba(243,237,226,0.3); }
+
+.plan-rule { width: 32px; height: 1px; background: var(--border2); margin-bottom: 32px; }
+.plan.featured .plan-rule { background: rgba(184,146,42,0.3); }
+
+.plan-features { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.plan-features li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 14px; color: var(--muted); line-height: 1.5; font-weight: 300;
+}
+.plan.featured .plan-features li { color: rgba(243,237,226,0.5); }
+.plan-features li.off { opacity: 0.3; text-decoration: line-through; }
+.feat-tick { color: var(--sage); flex-shrink: 0; }
+.plan.featured .feat-tick { color: var(--gold2); }
+
+.plan-btn {
+  width: 100%; margin-top: 44px;
+  font-size: 11px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; border: none; cursor: pointer;
+  padding: 16px; transition: all 0.25s; font-family: 'Jost', sans-serif;
+}
+.plan .plan-btn { background: var(--ink); color: var(--cream); }
+.plan .plan-btn:hover { background: var(--gold); }
+.plan.featured .plan-btn { background: var(--gold); color: var(--ink); }
+.plan.featured .plan-btn:hover { background: var(--gold2); }
+
+/* ─── TESTIMONIALS ─── */
+.testi-section {
+  background: var(--cream2);
+  border-top: 1px solid var(--border);
+  padding: 120px 56px;
+}
+.testi-inner { max-width: 1100px; margin: 0 auto; }
+.testi-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--border); margin-top: 64px;
+}
+.testi-card {
+  background: var(--cream2); padding: 44px 36px;
+  transition: background 0.2s;
+}
+.testi-card:hover { background: var(--white); }
+.testi-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 56px; color: var(--gold2); line-height: 0.7;
+  opacity: 0.5; display: block; margin-bottom: 16px;
+}
+.testi-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; font-style: italic; color: var(--ink);
+  line-height: 1.75; margin-bottom: 28px;
+}
+.testi-sig { border-top: 1px solid var(--border); padding-top: 18px; }
+.testi-name {
+  font-size: 13px; font-weight: 500; color: var(--ink); letter-spacing: 0.5px;
+}
+.testi-role { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--ink);
+  padding: 56px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 24px;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 300; letter-spacing: 5px;
+  text-transform: uppercase; color: var(--cream);
+  display: flex; align-items: center; gap: 12px;
+}
+.footer-emblem {
+  width: 28px; height: 28px; border: 1px solid rgba(184,146,42,0.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; color: var(--gold2);
+}
+footer p { font-size: 12px; color: rgba(243,237,226,0.3); letter-spacing: 1px; }
+
+/* ─── TOAST ─── */
+.toast {
+  position: fixed; bottom: 32px; right: 32px; z-index: 999;
+  background: var(--ink); color: var(--cream);
+  padding: 14px 26px; font-size: 13px; font-weight: 300; letter-spacing: 1px;
+  display: none; align-items: center; gap: 10px;
+  border-left: 2px solid var(--gold);
+  box-shadow: 0 8px 40px rgba(26,21,16,0.2);
+  font-family: 'Jost', sans-serif;
+}
+.toast.show { display: flex; animation: slideIn 0.3s ease; }
+@keyframes slideIn { from{transform:translateY(12px);opacity:0} to{transform:none;opacity:1} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:960px){
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 80px 28px 64px; }
+  .hiw,.pricing-section,.testi-section,.demo-section,.chapters-section,.waitlist-section { padding: 80px 24px; }
+  .waitlist-form { flex-direction: column; }
+  .wl-inputs { flex-direction: column; }
+  .steps { grid-template-columns: 1fr 1fr; gap: 40px 24px; }
+  .ch-grid { grid-template-columns: 1fr 1fr; }
+  .app-layout { grid-template-columns: 1fr; }
+  .sb, .ap { display: none; }
+  .ed { border-right: none; }
+  .plans { grid-template-columns: 1fr; }
+  .plan:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+  .testi-grid { grid-template-columns: 1fr; }
+  footer { padding: 40px 24px; }
+}
+
+/* ─── WAITLIST ─── */
+.waitlist-section {
+  padding: 120px 56px;
+  background: var(--ink);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.waitlist-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+.waitlist-section .s-eye { color: var(--gold2); }
+.waitlist-section .s-line { background: var(--gold2); }
+.waitlist-section .section-eyebrow { justify-content: center; }
+.waitlist-section .s-h { color: var(--cream); }
+.waitlist-section .s-h em { color: var(--gold2); }
+.waitlist-section .s-sub { color: rgba(243,237,226,0.45); max-width: 520px; margin: 0 auto 48px; }
+
+.waitlist-form {
+  display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px;
+}
+.wl-inputs { display: flex; gap: 14px; }
+.wl-input {
+  flex: 1; background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1); padding: 16px 20px;
+  font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 300;
+  color: var(--cream); outline: none; transition: border-color 0.2s;
+}
+.wl-input::placeholder { color: rgba(243,237,226,0.3); }
+.wl-input:focus { border-color: var(--gold2); }
+.btn-waitlist {
+  font-size: 11px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--ink);
+  background: var(--gold); border: none; cursor: pointer;
+  padding: 16px 36px; transition: all 0.25s;
+  font-family: 'Jost', sans-serif; white-space: nowrap;
+}
+.btn-waitlist:hover { background: var(--gold2); transform: translateY(-1px); }
+.btn-waitlist:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.wl-note {
+  font-size: 12px; color: rgba(243,237,226,0.25);
+  letter-spacing: 1px; text-align: center; margin-top: 6px;
+}
+.wl-success {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-style: italic; color: var(--gold2);
+  text-align: center; padding: 32px 0; line-height: 1.6;
+}
+
+/* ─── VOICE RECORDING ─── */
+.voice-row {
+  display: flex; align-items: center; gap: 12px; margin-top: -10px;
+}
+.btn-voice {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--muted);
+  background: transparent; border: 1px solid var(--border2); cursor: pointer;
+  padding: 10px 18px; transition: all 0.2s;
+  font-family: 'Jost', sans-serif; flex-shrink: 0;
+}
+.btn-voice:hover { border-color: var(--gold); color: var(--gold); }
+.btn-voice.recording {
+  background: rgba(220,38,38,0.07);
+  border-color: rgba(220,38,38,0.4); color: #dc2626;
+}
+.rec-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: #dc2626;
+  animation: recPulse 1s ease-in-out infinite;
+}
+@keyframes recPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(1.5)} }
+.voice-hint {
+  font-size: 12px; color: var(--muted); font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+}
+</style>
+</head>
+<body>
+
+<!-- PRE-SALE BANNER -->
+<div id="presaleBanner" style="background:var(--gold);padding:10px 24px;text-align:center;position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:center;gap:16px;">
+  <span style="font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--ink);letter-spacing:0.5px;">✦ Lancement — Offre pré-vente · Accès prioritaire · Prix bloqué à vie</span>
+  <button onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})" style="font-family:'Jost',sans-serif;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:var(--ink);color:var(--cream);border:none;padding:6px 14px;cursor:pointer;flex-shrink:0;">Réserver →</button>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">
+    <div class="logo-emblem"></div>
+    <span class="logo-text">Héritage</span>
+  </a>
+  <div class="nav-links">
+    <a href="#how">Le processus</a>
+    <a href="#demo">Démo</a>
+    <a href="#pricing">Tarifs</a>
+  </div>
+  <div class="nav-actions">
+    <button class="btn-nav-ghost">Connexion</button>
+    <button class="btn-nav-fill" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Commencer</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-overline">
+      <div class="hero-overline-line"></div>
+      <div class="hero-overline-text">Mémoire · Sagesse · Transmission</div>
+    </div>
+    <h1>
+      Chaque vie mérite<br>
+      <em>d'être transmise.</em>
+    </h1>
+    <div class="hero-rule"></div>
+    <p class="hero-p">Héritage guide vos proches à travers 12 chapitres essentiels. L'IA pose les bonnes questions — et transforme leurs réponses en un livre que vos descendants garderont pour toujours.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Rejoindre la liste</button>
+      <button class="btn-secondary" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Essayer la démo</button>
+    </div>
+    <div class="hero-nums">
+      <div class="hero-num-item">
+        <span class="n">12</span>
+        <span class="l">Chapitres guidés</span>
+      </div>
+      <div class="hero-num-item">
+        <span class="n">1/sem.</span>
+        <span class="l">Question profonde</span>
+      </div>
+      <div class="hero-num-item">
+        <span class="n">∞</span>
+        <span class="l">Générations</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="book-scene">
+      <div class="bk bk-3"></div>
+      <div class="bk bk-2"></div>
+      <div class="bk bk-1">
+        <div class="bk-spine"></div>
+        <div class="bk-content">
+          <span class="bk-ornament">✦</span>
+          <div class="bk-title">L'héritage de<br>Grand-mère<br>Suzanne</div>
+          <div class="bk-subtitle">1952 – 2024</div>
+          <div class="bk-divider"></div>
+          <div class="bk-name">S · M</div>
+        </div>
+        <div class="bk-bottom-ornament">✦ · ✦</div>
+      </div>
+    </div>
+
+    <div class="hero-quote">
+      <span class="hero-quote-mark">"</span>
+      <div class="hero-quote-text">Je ne savais pas que ma mère avait traversé autant d'épreuves. Ce livre a changé notre relation pour toujours.</div>
+      <div class="hero-quote-sig">Isabelle D. · Fille, 44 ans</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="hiw" id="how">
+  <div class="section-eyebrow">
+    <div class="s-line"></div>
+    <div class="s-eye">Le processus</div>
+  </div>
+  <h2 class="s-h">Simple comme<br><em>une conversation.</em></h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <span class="step-icon">🎁</span>
+      <h3>Vous offrez l'accès</h3>
+      <p>Créez un compte pour votre proche. Il reçoit une invitation chaleureuse et peut commencer à son rythme.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <span class="step-icon">💬</span>
+      <h3>L'IA guide l'entretien</h3>
+      <p>Sur 12 semaines, une question profonde par semaine. L'IA relance, approfondit, fait émerger l'essentiel.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <span class="step-icon">📖</span>
+      <h3>Le livre prend forme</h3>
+      <p>Chaque réponse devient un chapitre narratif. L'IA structure le tout comme une véritable autobiographie.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <span class="step-icon">🌿</span>
+      <h3>Transmis pour toujours</h3>
+      <p>Un livre numérique, un PDF haute qualité, et une version audio. Pour les générations qui viendront.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="waitlist-section" id="waitlist">
+  <div class="waitlist-inner">
+    <div class="section-eyebrow">
+      <div class="s-line"></div>
+      <div class="s-eye">Pré-lancement</div>
+    </div>
+    <h2 class="s-h">Soyez parmi<br><em>les premiers.</em></h2>
+    <p class="s-sub">Héritage est en pré-lancement. Inscrivez-vous pour obtenir un accès prioritaire et votre tarif bloqué à vie.</p>
+    <form class="waitlist-form" id="waitlistForm" onsubmit="submitWaitlist(event)">
+      <div class="wl-inputs">
+        <input type="text" class="wl-input" id="wlName" placeholder="Votre prénom" autocomplete="given-name">
+        <input type="email" class="wl-input" id="wlEmail" placeholder="Votre adresse email" required autocomplete="email">
+      </div>
+      <button type="submit" class="btn-waitlist" id="wlBtn">Rejoindre la liste →</button>
+    </form>
+    <p class="wl-note">Aucun spam · Désabonnement en 1 clic</p>
+  </div>
+</section>
+
+<!-- CHAPTERS -->
+<section class="chapters-section" id="chapters">
+  <div class="chapters-inner">
+    <div class="section-eyebrow">
+      <div class="s-line"></div>
+      <div class="s-eye">Les chapitres</div>
+    </div>
+    <h2 class="s-h">Une vie entière,<br><em>chapitre par chapitre.</em></h2>
+    <p class="s-sub">Douze domaines essentiels, des centaines de questions conçues pour faire surgir la sagesse de chaque vie.</p>
+    <div class="ch-grid">
+      <div class="ch-card">
+        <div class="ch-num-big">I</div>
+        <span class="ch-icon">🌍</span>
+        <h3>Les origines</h3>
+        <p>Famille, racines, pays, langues perdues ou gardées. D'où venons-nous vraiment.</p>
+        <div class="ch-count">8 questions guidées</div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num-big">II</div>
+        <span class="ch-icon">🌅</span>
+        <h3>L'enfance</h3>
+        <p>Souvenirs sensoriels, maison d'enfance, amis du quartier, étés qui n'en finissaient pas.</p>
+        <div class="ch-count">10 questions guidées</div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num-big">III</div>
+        <span class="ch-icon">🎓</span>
+        <h3>La formation</h3>
+        <p>Les professeurs marquants, les rêves du jeune adulte, les chemins pris et abandonnés.</p>
+        <div class="ch-count">7 questions guidées</div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num-big">IV</div>
+        <span class="ch-icon">💛</span>
+        <h3>L'amour</h3>
+        <p>Les premières émotions, la rencontre qui a tout changé, ce que l'amour a enseigné.</p>
+        <div class="ch-count">9 questions guidées</div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num-big">V</div>
+        <span class="ch-icon">⚡</span>
+        <h3>Les épreuves</h3>
+        <p>Les moments difficiles traversés, les ressources trouvées, ce qui a forgé le caractère.</p>
+        <div class="ch-count">8 questions guidées</div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-num-big">XII</div>
+        <span class="ch-icon">✉️</span>
+        <h3>Le message</h3>
+        <p>Ce que vous voulez dire aux générations futures. Vos conseils. Votre vision du monde.</p>
+        <div class="ch-count">12 questions guidées</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="demo-section" id="demo">
+  <div class="demo-inner">
+    <div class="demo-header">
+      <div>
+        <div class="section-eyebrow">
+          <div class="s-line"></div>
+          <div class="s-eye">Démo interactive</div>
+        </div>
+        <h2 class="s-h">Essayez<br><em>maintenant.</em></h2>
+        <p class="s-sub" style="margin-top:10px">Choisissez un chapitre, écrivez votre réponse, et l'IA génère une question de suivi personnalisée.</p>
+      </div>
+    </div>
+
+    <div class="shell">
+      <div class="shell-bar">
+        <div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div>
+        <div class="shell-title">Héritage — Entretien guidé</div>
+      </div>
+      <div class="app-layout">
+
+        <!-- Sidebar -->
+        <div class="sb">
+          <div class="sb-label">Chapitres</div>
+          <div class="sb-ch" onclick="setChap(this,0)">
+            <div class="sb-ch-num">I</div>
+            <div class="sb-ch-name">Les origines</div>
+          </div>
+          <div class="sb-ch active" onclick="setChap(this,1)">
+            <div class="sb-ch-num">II</div>
+            <div class="sb-ch-name">L'enfance</div>
+            <div class="sb-ch-tick">✦</div>
+          </div>
+          <div class="sb-ch" onclick="setChap(this,2)">
+            <div class="sb-ch-num">III</div>
+            <div class="sb-ch-name">L'amour</div>
+          </div>
+          <div class="sb-ch" onclick="setChap(this,3)">
+            <div class="sb-ch-num">IV</div>
+            <div class="sb-ch-name">Les épreuves</div>
+          </div>
+          <div class="sb-ch" onclick="setChap(this,4)">
+            <div class="sb-ch-num">V</div>
+            <div class="sb-ch-name">La sagesse</div>
+          </div>
+          <div class="sb-ch" onclick="setChap(this,5)">
+            <div class="sb-ch-num">VI</div>
+            <div class="sb-ch-name">Le message</div>
+          </div>
+        </div>
+
+        <!-- Editor -->
+        <div class="ed">
+          <div class="ed-top">
+            <div class="ed-chapter-tag" id="chapTag">Chapitre II · L'enfance</div>
+            <div class="ed-wc" id="wcDisplay">0 mot</div>
+          </div>
+
+          <div class="q-card">
+            <div class="q-header">
+              <div class="q-avatar">✦</div>
+              <div class="q-from">Héritage</div>
+            </div>
+            <div class="q-text" id="qText">"Quel est votre souvenir d'enfance le plus vif — une image, une odeur, un son qui vous revient encore aujourd'hui comme si c'était hier ?"</div>
+          </div>
+
+          <textarea class="ans-ta" id="ansText" placeholder="Écrivez librement... ou dictez votre réponse. Pas de bonne ou mauvaise réponse. Juste votre vérité."></textarea>
+
+          <div class="voice-row">
+            <button type="button" class="btn-voice" id="voiceBtn" onclick="toggleRecording()">🎙 Dicter</button>
+            <span class="voice-hint" id="voiceHint">Parlez en français — la transcription est instantanée</span>
+          </div>
+
+          <div class="ai-follow" id="aiFollow">
+            <div class="ai-follow-head">
+              <div class="ai-follow-dot"></div>
+              <div class="ai-follow-label">Question de suivi</div>
+            </div>
+            <div class="ai-follow-text" id="aiFollowText"></div>
+          </div>
+
+          <div class="ed-footer">
+            <div></div>
+            <button class="btn-deepen" id="deepenBtn" onclick="deepen()">
+              <span id="deepenLabel">✦ Approfondir</span>
+              <div class="spin-sm" id="deepenSpin"></div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Analysis -->
+        <div class="ap" id="apPanel">
+          <div class="ap-title">Analyse IA</div>
+          <div class="ap-ph" id="apPh">
+            <div class="ap-ph-icon">✦</div>
+            <p class="ap-ph-text">Vos insights apparaîtront ici après analyse.</p>
+          </div>
+          <div id="apContent" style="display:none;flex-direction:column;gap:13px;display:none;">
+            <div class="score-block">
+              <div class="score-val" id="scoreVal">—</div>
+              <div class="score-label">Richesse narrative</div>
+            </div>
+            <div class="insight-block">
+              <div class="ib-label">Tonalité</div>
+              <div class="ib-text" id="ibEmotion"></div>
+            </div>
+            <div class="insight-block">
+              <div class="ib-label">Thèmes</div>
+              <div class="themes-wrap" id="ibThemes"></div>
+            </div>
+            <div class="insight-block">
+              <div class="ib-label">À explorer</div>
+              <div class="ib-text" id="ibNext"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="section-eyebrow">
+    <div class="s-line"></div>
+    <div class="s-eye">Investissement</div>
+  </div>
+  <h2 class="s-h">Un prix pour<br><em>l'éternité.</em></h2>
+  <p class="s-sub">Moins cher qu'un dîner. Infiniment plus précieux.</p>
+
+  <div class="plans">
+    <div class="plan">
+      <div class="plan-tier">Essentiel <span style="font-size:10px;color:var(--gold);letter-spacing:2px;font-family:'Jost',sans-serif;">· PRÉ-VENTE</span></div>
+      <div class="plan-price"><sup>€</sup>9</div>
+      <div class="plan-period">par mois</div>
+      <div class="plan-rule"></div>
+      <ul class="plan-features">
+        <li><span class="feat-tick">✦</span>12 chapitres guidés</li>
+        <li><span class="feat-tick">✦</span>Questions de suivi IA</li>
+        <li><span class="feat-tick">✦</span>Livre numérique interactif</li>
+        <li><span class="feat-tick">✦</span>Export PDF haute résolution</li>
+        <li class="off"><span class="feat-tick">—</span>Version audio narratée</li>
+        <li class="off"><span class="feat-tick">—</span>Livre imprimé & relié</li>
+      </ul>
+      <button class="plan-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Rejoindre la liste →</button>
+    </div>
+
+    <div class="plan featured">
+      <div class="plan-badge">Recommandé</div>
+      <div class="plan-tier">Mémoire Vivante <span style="font-size:10px;color:var(--gold2);letter-spacing:2px;font-family:'Jost',sans-serif;">· PRÉ-VENTE</span></div>
+      <div class="plan-price"><sup>€</sup>24</div>
+      <div class="plan-period">par mois · tout inclus</div>
+      <div class="plan-rule"></div>
+      <ul class="plan-features">
+        <li><span class="feat-tick">✦</span>12 chapitres guidés</li>
+        <li><span class="feat-tick">✦</span>Questions de suivi IA</li>
+        <li><span class="feat-tick">✦</span>Livre numérique interactif</li>
+        <li><span class="feat-tick">✦</span>Export PDF haute résolution</li>
+        <li><span class="feat-tick">✦</span>Version audio narratée</li>
+        <li><span class="feat-tick">✦</span>1 livre imprimé & relié / an</li>
+      </ul>
+      <button class="plan-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Accès prioritaire →</button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section" id="testimonials">
+  <div class="testi-inner">
+    <div class="section-eyebrow">
+      <div class="s-line"></div>
+      <div class="s-eye">Témoignages</div>
+    </div>
+    <h2 class="s-h">Des mots qui<br><em>traversent le temps.</em></h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <span class="testi-mark">"</span>
+        <p class="testi-text">J'ai offert Héritage à ma mère pour ses 75 ans. Je ne savais pas qu'elle avait traversé autant d'épreuves avant ma naissance. Ce livre a changé notre relation pour toujours.</p>
+        <div class="testi-sig">
+          <div class="testi-name">Isabelle D.</div>
+          <div class="testi-role">A offert Héritage à sa mère</div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <span class="testi-mark">"</span>
+        <p class="testi-text">Mon père de 82 ans n'avait jamais parlé de son passé. Les questions d'Héritage ont ouvert des portes fermées depuis 60 ans. Des trésors que j'aurais perdus pour toujours.</p>
+        <div class="testi-sig">
+          <div class="testi-name">Marc R.</div>
+          <div class="testi-role">Fils d'un immigrant de 1ère génération</div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <span class="testi-mark">"</span>
+        <p class="testi-text">Écrire ce livre pour mes 7 petits-enfants est le plus beau cadeau que je puisse leur faire. L'IA me pose des questions que personne ne m'avait jamais posées en 71 ans.</p>
+        <div class="testi-sig">
+          <div class="testi-name">Suzanne M., 71 ans</div>
+          <div class="testi-role">Grand-mère de 7 petits-enfants</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="footer-emblem">✦</div>
+    Héritage
+  </div>
+  <p>© 2026 — Préserver ce qui compte vraiment</p>
+  <p>RGPD · Chiffrement · Vos histoires vous appartiennent</p>
+</footer>
+
+<div class="toast" id="toastEl"><span id="toastMsg"></span></div>
+
+<script>
+const chapters = [
+  { tag:"Chapitre I · Les origines",   q:'"D\'où vient votre famille ? Y a-t-il un pays, une région, une langue perdue ou gardée — et que ressentez-vous quand vous y pensez ?"' },
+  { tag:"Chapitre II · L'enfance",     q:'"Quel est votre souvenir d\'enfance le plus vif — une image, une odeur, un son qui vous revient encore aujourd\'hui comme si c\'était hier ?"' },
+  { tag:"Chapitre III · L'amour",      q:'"Comment avez-vous rencontré la personne qui a le plus compté dans votre vie ? Qu\'est-ce qui vous a frappé en premier ?"' },
+  { tag:"Chapitre IV · Les épreuves",  q:'"Quelle est l\'épreuve la plus difficile que vous ayez traversée, et qu\'est-ce qu\'elle vous a appris sur vous-même ?"' },
+  { tag:"Chapitre V · La sagesse",     q:'"Si vous pouviez glisser un seul conseil dans la poche de votre moi de 20 ans — lequel serait-ce ?"' },
+  { tag:"Chapitre VI · Le message",    q:'"Qu\'est-ce que vous voulez que vos petits-enfants sachent de vous — pas vos réalisations, mais qui vous étiez vraiment ?"' },
+];
+let curChap = 1;
+
+function setChap(el, idx) {
+  document.querySelectorAll('.sb-ch').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  curChap = idx;
+  document.getElementById('chapTag').textContent = chapters[idx].tag;
+  document.getElementById('qText').textContent = chapters[idx].q;
+  document.getElementById('ansText').value = '';
+  document.getElementById('aiFollow').style.display = 'none';
+  document.getElementById('wcDisplay').textContent = '0 mot';
+  document.getElementById('deepenLabel').textContent = '✦ Approfondir';
+  resetAP();
+}
+
+document.getElementById('ansText').addEventListener('input', function() {
+  const n = this.value.trim().split(/\s+/).filter(Boolean).length;
+  document.getElementById('wcDisplay').textContent = n + (n < 2 ? ' mot' : ' mots');
+});
+
+async function deepen() {
+  const txt = document.getElementById('ansText').value.trim();
+  if (txt.length < 15) { showToast('✦ Écrivez quelques lignes d\'abord...'); return; }
+
+  const btn = document.getElementById('deepenBtn');
+  const lbl = document.getElementById('deepenLabel');
+  const sp = document.getElementById('deepenSpin');
+  btn.disabled = true; lbl.style.display = 'none'; sp.style.display = 'block';
+  document.getElementById('aiFollow').style.display = 'none';
+  resetAP();
+
+  const prompt = `Tu es un interviewer bienveillant expert en histoires de vie.
+
+Chapitre : ${chapters[curChap].tag}
+Question : ${chapters[curChap].q}
+Réponse : "${txt}"
+
+Génère un JSON valide (sans markdown) :
+{
+  "followup": "<une seule question de suivi courte et profonde, ancrée dans la réponse, qui fait surgir un détail sensoriel ou émotionnel précis>",
+  "score": <1-10 richesse narrative>,
+  "emotion": "<1 phrase sur la tonalité émotionnelle>",
+  "themes": ["<thème1>","<thème2>","<thème3>"],
+  "next": "<1 courte suggestion sur ce qu'il serait riche d'explorer ensuite>"
+}
+Tout en français.`;
+
+  try {
+    const res = await fetch('/api/deepen', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt })
+    });
+    const data = await res.json();
+    const raw = data.text || '{}';
+    let p;
+    try { p = JSON.parse(raw.replace(/```json|```/g, '').trim()); }
+    catch { p = { followup: 'Pouvez-vous me décrire un détail précis de ce moment — ce que vous voyiez, ce que vous sentiez ?', score: 6, emotion: 'Une belle sincérité transparaît dans vos mots.', themes: ['Mémoire', 'Émotions', 'Passé'], next: 'Explorez les personnes présentes dans ce souvenir.' }; }
+
+    // Follow-up
+    const fu = document.getElementById('aiFollow');
+    const ft = document.getElementById('aiFollowText');
+    fu.style.display = 'block'; ft.textContent = '';
+    let i = 0; const iv = setInterval(() => { ft.textContent += p.followup[i] || ''; i++; if (i >= p.followup.length) clearInterval(iv); }, 22);
+
+    // Analysis
+    document.getElementById('apPh').style.display = 'none';
+    const c = document.getElementById('apContent'); c.style.display = 'flex';
+    document.getElementById('scoreVal').textContent = (Math.min(10, Math.max(1, p.score || 6))) + '/10';
+    typeIn('ibEmotion', p.emotion || '');
+    setTimeout(() => typeIn('ibNext', p.next || ''), 300);
+    const tr = document.getElementById('ibThemes'); tr.innerHTML = '';
+    (p.themes || []).forEach(t => { const el = document.createElement('div'); el.className = 'th'; el.textContent = t; tr.appendChild(el); });
+
+  } catch (e) {
+    document.getElementById('aiFollowText').textContent = 'Pouvez-vous me décrire un détail sensoriel précis de ce moment ?';
+    document.getElementById('aiFollow').style.display = 'block';
+  }
+
+  btn.disabled = false; lbl.style.display = 'inline'; sp.style.display = 'none';
+  lbl.textContent = '↻ Nouvelle question';
+}
+
+function resetAP() {
+  document.getElementById('apPh').style.display = 'flex';
+  document.getElementById('apContent').style.display = 'none';
+}
+
+function typeIn(id, text) {
+  const el = document.getElementById(id); el.textContent = '';
+  let i = 0; const iv = setInterval(() => { el.textContent += text[i] || ''; i++; if (i >= text.length) clearInterval(iv); }, 18);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toastEl');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+/* ── VOICE RECORDING ── */
+let recognition = null;
+let isRecording = false;
+
+function toggleRecording() {
+  isRecording ? stopRecording() : startRecording();
+}
+
+function startRecording() {
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRec) {
+    showToast('Dictée vocale non disponible sur ce navigateur (utilisez Chrome ou Edge)');
+    return;
+  }
+
+  recognition = new SpeechRec();
+  recognition.lang = 'fr-FR';
+  recognition.continuous = true;
+  recognition.interimResults = true;
+
+  const ta = document.getElementById('ansText');
+  const baseText = ta.value;
+
+  recognition.onresult = (event) => {
+    let final = '';
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      if (event.results[i].isFinal) final += event.results[i][0].transcript + ' ';
+    }
+    if (final) {
+      ta.value = (baseText + ' ' + final).trim();
+      const n = ta.value.trim().split(/\s+/).filter(Boolean).length;
+      document.getElementById('wcDisplay').textContent = n + (n < 2 ? ' mot' : ' mots');
+    }
+  };
+
+  recognition.onerror = (e) => {
+    if (e.error !== 'no-speech') { showToast('Microphone non disponible'); stopRecording(); }
+  };
+
+  recognition.onend = () => { if (isRecording) recognition.start(); };
+
+  recognition.start();
+  isRecording = true;
+
+  const btn = document.getElementById('voiceBtn');
+  btn.classList.add('recording');
+  btn.innerHTML = '<span class="rec-dot"></span> Arrêter';
+  document.getElementById('voiceHint').textContent = 'Enregistrement en cours — parlez naturellement...';
+}
+
+function stopRecording() {
+  if (recognition) { recognition.stop(); recognition = null; }
+  isRecording = false;
+  const btn = document.getElementById('voiceBtn');
+  btn.classList.remove('recording');
+  btn.innerHTML = '🎙 Dicter';
+  document.getElementById('voiceHint').textContent = 'Parlez en français — la transcription est instantanée';
+}
+
+/* ── WAITLIST ── */
+async function submitWaitlist(e) {
+  e.preventDefault();
+  const name = document.getElementById('wlName').value.trim();
+  const email = document.getElementById('wlEmail').value.trim();
+  if (!email) return;
+
+  const btn = document.getElementById('wlBtn');
+  btn.textContent = '...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/api/waitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email }),
+    });
+
+    if (res.ok) {
+      document.getElementById('waitlistForm').outerHTML =
+        `<div class="wl-success">✦ Merci ${name ? name : ''}${name ? ' —' : ''} vous serez parmi les premiers à recevoir votre invitation.</div>`;
+    } else {
+      throw new Error();
+    }
+  } catch {
+    btn.textContent = 'Réessayer';
+    btn.disabled = false;
+    showToast('Une erreur est survenue, réessayez.');
+  }
+}
+</script>
+</body>
+</html>
